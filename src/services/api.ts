@@ -1,0 +1,18 @@
+import axios, { AxiosError } from "axios";
+
+// Using Wise Old Man instead of official Jagex API because of missing CORS response header
+// See: https://docs.wiseoldman.net/
+const WOM_URL = "https://api.wiseoldman.net/v2/players/";
+
+export async function fetchStatsRunescape(username: string) {
+  try {
+    const response = await axios.get(`${WOM_URL}${encodeURIComponent(username)}`);
+    return Object.values(response.data.latestSnapshot.data.skills) as Skill[];
+  } catch (error) {
+    if ((error as AxiosError)?.response?.status === 404) {
+      return [];
+    } else {
+      throw error;
+    }
+  }
+}
