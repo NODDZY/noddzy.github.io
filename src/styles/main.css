@@ -1,0 +1,154 @@
+@import "./constants.css";
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--text-1);
+  background-color: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Default */
+body {
+  display: flex;
+  margin: 0px;
+}
+
+/* Bodies */
+#root {
+  width: 100%;
+}
+#header {
+  height: var(--nav-height);
+  padding-left: var(--sidebar-width);
+  text-align: center;
+}
+#main {
+  padding-top: var(--nav-height);
+  margin: 0;
+  padding-left: var(--sidebar-width);
+}
+#error {
+  text-align: center;
+  padding-top: 25vh;
+}
+
+/* Components */
+#sidebar {
+  position: fixed;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  padding: var(--nav-height) 32px 96px 32px;
+  width: calc(100vw - 64px);
+  max-width: 320px;
+  box-sizing: border-box;
+  background-color: var(--vp-sidebar-bg-color);
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: translate(-100%);
+  transition: opacity 0.5s, transform 0.25s ease;
+  overscroll-behavior: contain;
+}
+.sidebarText {
+  flex-grow: 1;
+  padding: 0px 0;
+  line-height: 24px;
+  font-size: 14px;
+  transition: color 0.25s;
+  color: var(--text-1);
+  overflow-wrap: break-word;
+  margin: 0;
+  direction: ltr;
+  font-synthesis: style;
+}
+
+/* Elements */
+button {
+  border-radius: 0px;
+  border: 1px solid transparent;
+  outline: 0px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--bg-alt);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+input {
+  border-radius: 0px;
+  border: 1px solid transparent;
+  outline: 0px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--bg-alt);
+  transition: border-color 0.25s;
+}
+button:hover,
+input:hover {
+  border-color: var(--highlight);
+}
+button:focus,
+button:focus-visible,
+input:focus,
+input:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+a {
+  font-weight: 500;
+  color: var(--highlight);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--highlight-dark);
+}
+
+@media (min-width: 960px) {
+  #main {
+    margin: 0;
+    padding-left: var(--sidebar-width);
+  }
+  #sidebar {
+    height: 100vh;
+    padding-top: var(--nav-height);
+    padding-bottom: 128px;
+    width: var(--sidebar-width);
+    max-width: 100%;
+    z-index: 1;
+    background-color: var(--bg-alt);
+    transform: translate(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@media (min-width: 1440px) {
+  #main {
+    padding-right: calc((100vw - var(--layout-max-width)) / 2);
+    padding-left: calc((100vw - var(--layout-max-width)) / 2 + var(--sidebar-width));
+  }
+  #sidebar {
+    padding-left: max(32px, calc((100% - (var(--layout-max-width) - 64px)) / 2));
+    width: calc((100% - (var(--layout-max-width) - 64px)) / 2 + var(--sidebar-width) - 32px);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  button,
+  a:hover {
+    color: var(--highlight-light);
+  }
+}

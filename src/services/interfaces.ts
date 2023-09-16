@@ -1,4 +1,4 @@
-interface Skill {
+interface RunescapeSkill {
   metric: string;
   experience: number;
   rank: number;
