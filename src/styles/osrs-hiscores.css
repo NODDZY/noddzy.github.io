@@ -1,7 +1,8 @@
 @import "./constants.css";
 
 #hiscores {
-  padding: 2% 5% 5% 5%;
+  max-width: 700px;
+  min-width: 380px;
 }
 
 .hiscores-text {
@@ -23,7 +24,7 @@
   border-radius: 0px 5px 5px 0px;
 }
 
-#skillTable {
+#skill-table {
   width: 100%;
   border-collapse: collapse;
 }

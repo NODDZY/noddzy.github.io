@@ -36,7 +36,9 @@ export default function Hiscores() {
   ));
 
   return (
-    <div id="hiscores">
+    <div
+      className="main-element"
+      id="hiscores">
       <h1 className="hiscores-text">Old School RuneScape HiScores</h1>
       <p className="hiscores-text">{DESCRIPTION}</p>
 
@@ -55,7 +57,7 @@ export default function Hiscores() {
       </div>
 
       {skills.length > 0 && <h2 id="hiscores-username">{lastUsername}</h2>}
-      <table id="skillTable">
+      <table id="skill-table">
         <thead>
           {skills.length > 0 && (
             <tr>

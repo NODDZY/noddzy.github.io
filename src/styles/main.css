@@ -20,6 +20,7 @@
 body {
   display: flex;
   margin: 0px;
+  padding: 0px;
 }
 
 /* Bodies */
@@ -34,7 +35,9 @@ body {
 #main {
   padding-top: var(--nav-height);
   margin: 0;
-  padding-left: var(--sidebar-width);
+}
+.main-element {
+  padding: 2% 5% 5% 5%;
 }
 #error {
   text-align: center;
@@ -52,7 +55,7 @@ body {
   width: calc(100vw - 64px);
   max-width: 320px;
   box-sizing: border-box;
-  background-color: var(--vp-sidebar-bg-color);
+  background-color: var(--bg-alt);
   opacity: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -60,17 +63,22 @@ body {
   transition: opacity 0.5s, transform 0.25s ease;
   overscroll-behavior: contain;
 }
-.sidebarText {
+.sidebar-text {
+  font-family: var(--font-family-base);
   flex-grow: 1;
   padding: 0px 0;
-  line-height: 24px;
-  font-size: 14px;
+  line-height: 30px;
+  font-size: 16px;
   transition: color 0.25s;
-  color: var(--text-1);
+  color: var(--text-2);
   overflow-wrap: break-word;
   margin: 0;
   direction: ltr;
   font-synthesis: style;
+}
+.sidebar-header {
+  font-weight: bold;
+  color: var(--text-1);
 }
 
 /* Elements */
@@ -119,12 +127,10 @@ a:hover {
 
 @media (min-width: 960px) {
   #main {
-    margin: 0;
     padding-left: var(--sidebar-width);
   }
   #sidebar {
     height: 100vh;
-    padding-top: var(--nav-height);
     padding-bottom: 128px;
     width: var(--sidebar-width);
     max-width: 100%;

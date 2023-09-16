@@ -4,22 +4,16 @@ export default function Sidebar() {
   return (
     <aside id="sidebar">
       <nav>
-        <ul>
-          <li>
-            <Link
-              className="sidebarText"
-              to={`hiscores`}>
-              OSRS HiScores
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="sidebarText"
-              to={`nothinghere`}>
-              ERROR
-            </Link>
-          </li>
-        </ul>
+        <div>
+          <p className="sidebar-text sidebar-header">Elements</p>
+        </div>
+        <div>
+          <Link
+            className="sidebar-text"
+            to={`hiscores`}>
+            OSRS HiScores
+          </Link>
+        </div>
       </nav>
     </aside>
   );
