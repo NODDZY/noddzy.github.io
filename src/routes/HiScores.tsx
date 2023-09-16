@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fetchSkillsRunescape } from "../services/api";
 import { FiSearch } from "react-icons/fi";
+import { RunescapeSkill } from "../services/interfaces";
 import "../styles/osrs-hiscores.css";
 
 const DESCRIPTION = "Check your Old School RuneScape progression and see where you rank in the community.";

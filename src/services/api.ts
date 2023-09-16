@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { RunescapeSkill } from "./interfaces";
 
 // Using Wise Old Man instead of official Jagex API because of missing CORS response header
 // See: https://docs.wiseoldman.net/
