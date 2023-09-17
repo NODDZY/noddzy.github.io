@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <aside id="sidebar">
+    <aside id="sidebar" className="sidebar">
       <nav>
         <div>
           <p className="sidebar-text sidebar-header">Elements</p>

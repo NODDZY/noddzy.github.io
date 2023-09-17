@@ -27,13 +27,8 @@ body {
 #root {
   width: 100%;
 }
-#header {
-  height: var(--nav-height);
-  padding-left: var(--sidebar-width);
-  text-align: center;
-}
 #main {
-  padding-top: var(--nav-height);
+  padding-top: 0;
   margin: 0;
 }
 .main-element {
@@ -45,7 +40,46 @@ body {
 }
 
 /* Components */
-#sidebar {
+#header {
+  background-color: var(--bg-alt);
+  height: var(--nav-height);
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header-title {
+  box-sizing: border-box;
+  padding: 0 32px;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--sidebar-width);
+}
+#header-title-inner {
+  color: var(--text-1);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+}
+#header-content {
+  display: flex;
+}
+#hamburger-menu {
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: color 0.25s;
+  color: var(--text-2);
+  cursor: pointer;
+}
+#hamburger-menu:hover {
+  color: var(--text-1);
+}
+
+.sidebar {
   position: fixed;
   top: 0px;
   bottom: 0;
@@ -63,8 +97,19 @@ body {
   transition: opacity 0.5s, transform 0.25s ease;
   overscroll-behavior: contain;
 }
+.sidebar-open {
+  height: 100vh;
+  padding-top: 15px;
+  padding-bottom: 128px;
+  width: var(--sidebar-width);
+  max-width: 100%;
+  z-index: 11;
+  transform: translate(0);
+  transition: opacity 0s, transform 0.25s ease;
+  opacity: 1;
+  visibility: visible;
+}
 .sidebar-text {
-  font-family: var(--font-family-base);
   flex-grow: 1;
   padding: 0px 0;
   line-height: 30px;
@@ -77,8 +122,18 @@ body {
   font-synthesis: style;
 }
 .sidebar-header {
+  padding-top: 10px;
   font-weight: bold;
   color: var(--text-1);
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 /* Elements */
@@ -129,6 +184,13 @@ a:hover {
   #main {
     padding-left: var(--sidebar-width);
   }
+  #header {
+    background: var(--bg);
+  }
+  #header-title-inner {
+    transition: border-bottom 0s ease 0.25s;
+    border-bottom: 1px solid var(--divider);
+  }
   #sidebar {
     height: 100vh;
     padding-bottom: 128px;
@@ -145,6 +207,9 @@ a:hover {
   #main {
     padding-right: calc((100vw - var(--layout-max-width)) / 2);
     padding-left: calc((100vw - var(--layout-max-width)) / 2 + var(--sidebar-width));
+  }
+  #header {
+    padding-left: calc((100vw - var(--layout-max-width)) / 2 + var(--sidebar-width) - var(--sidebar-width));
   }
   #sidebar {
     padding-left: max(32px, calc((100% - (var(--layout-max-width) - 64px)) / 2));
