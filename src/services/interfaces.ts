@@ -1,4 +1,4 @@
-interface Skill {
+export interface RunescapeSkill {
   metric: string;
   experience: number;
   rank: number;
