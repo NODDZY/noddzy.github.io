@@ -48,6 +48,11 @@ export default function Hiscores() {
           id="search-input"
           type="text"
           onChange={(event) => setUsername(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key == "Enter") {
+              search();
+            }
+          }}
           placeholder="Username"
         />
         <button
