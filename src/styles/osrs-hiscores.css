@@ -1,0 +1,41 @@
+@import "./constants.css";
+
+#hiscores {
+  max-width: 700px;
+  min-width: 380px;
+}
+
+.hiscores-text {
+  padding: 4px;
+}
+#hiscores-username {
+  text-align: center;
+}
+
+#search-row {
+  margin-bottom: 2%;
+  padding-bottom: 2%;
+  border-bottom: 1px solid var(--divider);
+}
+#search-input {
+  border-radius: 5px 0px 0px 5px;
+}
+#search-button {
+  border-radius: 0px 5px 5px 0px;
+}
+
+#skill-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.column {
+  text-align: right;
+}
+.column-img {
+  text-align: center;
+  padding-top: 4px;
+}
+.column-skill {
+  text-align: left;
+}
