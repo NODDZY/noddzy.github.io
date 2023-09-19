@@ -8,8 +8,15 @@
 .hiscores-text {
   padding: 4px;
 }
-#hiscores-username {
+.hiscores-text-error {
+  padding: 4px;
+}
+#hiscores-username,
+#hiscores-links {
   text-align: center;
+}
+#hiscores-links a {
+  margin: 0 10px;
 }
 
 #search-row {

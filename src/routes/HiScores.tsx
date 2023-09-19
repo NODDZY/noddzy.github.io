@@ -1,23 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchSkillsRunescape } from "../services/api";
 import { FiSearch } from "react-icons/fi";
 import { RunescapeSkill } from "../services/interfaces";
 import "../styles/osrs-hiscores.css";
 
-const DESCRIPTION = "Check your Old School RuneScape progression and see where you rank in the community.";
-
 export default function Hiscores() {
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
   const [username, setUsername] = useState<string>("");
-  const [lastUsername, setLastUsername] = useState<string>();
+  const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("lastUsername") || null);
+
+  useEffect(() => {
+    // Load lastUsername and skills from localStorage when the component mounts.
+    const storedUsername = localStorage.getItem("lastUsername");
+    if (storedUsername) {
+      setLastUsername(storedUsername);
+    }
+    const storedSkills = JSON.parse(localStorage.getItem("skills") || "[]");
+    setSkills(storedSkills);
+  }, []);
 
   const search = async () => {
-    if (username && (skills.length || username.toLowerCase() !== lastUsername?.toLowerCase())) {
-      setLastUsername(username);
-      const fetchedSkills = await fetchSkillsRunescape(username);
-      setSkills(fetchedSkills);
-    } else {
+    if (username === lastUsername) {
+      // Don't search again if the username is the same as the last search.
+      return;
+    }
+
+    if (!username) {
+      // If the username is empty, clear the data and localStorage.
       setSkills([]);
+      setLastUsername(null);
+      localStorage.removeItem("lastUsername");
+      localStorage.removeItem("skills");
+      return;
+    }
+
+    const fetchedSkills = await fetchSkillsRunescape(username);
+
+    if (fetchedSkills !== null) {
+      setSkills(fetchedSkills);
+      setLastUsername(username);
+      localStorage.setItem("lastUsername", username);
+      localStorage.setItem("skills", JSON.stringify(fetchedSkills));
+    } else {
+      // If the fetched stats are null, clear the data and localStorage.
+      setSkills([]);
+      setLastUsername(null);
+      localStorage.removeItem("lastUsername");
+      localStorage.removeItem("skills");
     }
   };
 
@@ -41,7 +70,9 @@ export default function Hiscores() {
       className="main-element"
       id="hiscores">
       <h1 className="hiscores-text">Old School RuneScape HiScores</h1>
-      <p className="hiscores-text">{DESCRIPTION}</p>
+      <p className="hiscores-text">
+        Check your Old School RuneScape progression and see where you rank in the community.
+      </p>
 
       <div id="search-row">
         <input
@@ -62,21 +93,30 @@ export default function Hiscores() {
         </button>
       </div>
 
-      {skills.length > 0 && <h2 id="hiscores-username">{lastUsername}</h2>}
-      <table id="skill-table">
-        <thead>
-          {skills.length > 0 && (
-            <tr>
-              <th className="column-img"></th>
-              <th className="column-skill">Skill</th>
-              <th className="column">Rank</th>
-              <th className="column">Level</th>
-              <th className="column">XP</th>
-            </tr>
-          )}
-        </thead>
-        <tbody>{skillItem}</tbody>
-      </table>
+      {skills.length > 0 && (
+        <div>
+          <h2 id="hiscores-username">{lastUsername}</h2>
+
+          <table id="skill-table">
+            <thead>
+              <tr>
+                <th className="column-img"></th>
+                <th className="column-skill">Skill</th>
+                <th className="column">Rank</th>
+                <th className="column">Level</th>
+                <th className="column">XP</th>
+              </tr>
+            </thead>
+            <tbody>{skillItem}</tbody>
+          </table>
+
+          <p id="hiscores-links">
+            <a href={`https://secure.runescape.com/m=hiscore_oldschool/hiscorepersonal?user1=${lastUsername}`}>Official HiScores</a>
+            ·
+            <a href={`https://wiseoldman.net/players/${lastUsername}`}>Wise Old Man</a>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

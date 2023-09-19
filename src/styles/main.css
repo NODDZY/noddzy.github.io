@@ -175,6 +175,7 @@ a {
   font-weight: 500;
   color: var(--highlight);
   text-decoration: inherit;
+  cursor: pointer;
 }
 a:hover {
   color: var(--highlight-dark);
