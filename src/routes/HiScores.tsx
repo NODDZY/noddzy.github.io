@@ -20,7 +20,7 @@ export default function Hiscores() {
   }, []);
 
   const search = async () => {
-    if (username === lastUsername) {
+    if (username.toLowerCase() === lastUsername?.toLowerCase()) {
       // Don't search again if the username is the same as the last search.
       return;
     }
@@ -93,7 +93,7 @@ export default function Hiscores() {
         </button>
       </div>
 
-      {skills.length > 0 && (
+      {(skills.length > 0 && lastUsername) && (
         <div>
           <h2 id="hiscores-username">{lastUsername}</h2>
 
@@ -111,9 +111,9 @@ export default function Hiscores() {
           </table>
 
           <p id="hiscores-links">
-            <a href={`https://secure.runescape.com/m=hiscore_oldschool/hiscorepersonal?user1=${lastUsername}`}>Official HiScores</a>
+            <a href={`https://secure.runescape.com/m=hiscore_oldschool/hiscorepersonal?user1=${encodeURI(lastUsername)}`}>Official HiScores</a>
             ·
-            <a href={`https://wiseoldman.net/players/${lastUsername}`}>Wise Old Man</a>
+            <a href={`https://wiseoldman.net/players/${encodeURI(lastUsername)}`}>Wise Old Man</a>
           </p>
         </div>
       )}

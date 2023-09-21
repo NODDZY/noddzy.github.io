@@ -52,7 +52,7 @@ export default function Header() {
         <Link
           id="header-title-inner"
           to={`/`}>
-          <p>GitHub Pages</p>
+          <p>Index</p>
         </Link>
       </div>
       <div id="header-content"></div>

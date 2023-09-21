@@ -49,6 +49,7 @@ body {
   align-items: center;
 }
 #header-title {
+  background-color: var(--bg-alt);
   box-sizing: border-box;
   padding: 0 32px;
   z-index: 2;
@@ -125,6 +126,10 @@ body {
   padding-top: 10px;
   font-weight: bold;
   color: var(--text-1);
+}
+.sidebar-bottom {
+  position: absolute;
+  bottom: 10px;
 }
 .backdrop {
   position: fixed;
