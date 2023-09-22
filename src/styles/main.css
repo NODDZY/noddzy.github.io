@@ -193,6 +193,9 @@ a:hover {
   #header {
     background: var(--bg);
   }
+  #header-title {
+    position: fixed;
+  }
   #header-title-inner {
     transition: border-bottom 0s ease 0.25s;
     border-bottom: 1px solid var(--divider);
