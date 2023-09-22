@@ -17,3 +17,9 @@ export async function fetchRunescapeUser(username: string) {
     }
   }
 }
+
+export async function fetchWeatherForecast() {
+  // Using  MET Weather API
+  // See: https://developer.yr.no/
+  
+}

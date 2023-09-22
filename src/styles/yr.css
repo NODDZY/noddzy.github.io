@@ -1,0 +1,11 @@
+@import "./constants.css";
+
+#map {
+  width: 100%;
+  max-width: 650px;
+  min-width: 380px;
+  height: 300px;
+  border: 2px solid var(--bg-alt);
+  background-color: var(--bg-alt);
+  z-index: 1;
+}
