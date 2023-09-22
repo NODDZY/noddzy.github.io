@@ -49,12 +49,13 @@ body {
   align-items: center;
 }
 #header-title {
+  padding: 0 32px;
+  display: flex;
+  justify-content: right;
   background-color: var(--bg-alt);
   box-sizing: border-box;
-  padding: 0 32px;
   z-index: 2;
   width: 100%;
-  max-width: var(--sidebar-width);
 }
 #header-title-inner {
   color: var(--text-1);
@@ -194,9 +195,12 @@ a:hover {
     background: var(--bg);
   }
   #header-title {
+    justify-content: left;
+    width: var(--sidebar-width);
     position: fixed;
   }
   #header-title-inner {
+    width: 100%;
     transition: border-bottom 0s ease 0.25s;
     border-bottom: 1px solid var(--divider);
   }
