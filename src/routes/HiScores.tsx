@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchSkillsRunescape } from "../services/api";
+import { fetchRunescapeUser } from "../services/api";
 import { FiSearch } from "react-icons/fi";
 import { RunescapeSkill } from "../services/interfaces";
 import "../styles/osrs-hiscores.css";
@@ -34,12 +34,29 @@ export default function Hiscores() {
       return;
     }
 
-    const fetchedSkills = await fetchSkillsRunescape(username);
+    // Fetch user data
+    let fetchedSkills: RunescapeSkill[] = [];
+    let fetchedLastUsername: string | null = null;
+    const response = await fetchRunescapeUser(username);
 
-    if (fetchedSkills !== null) {
+    if (!response) {
+      // Response is "404 Not Found"
+      console.warn(`Could not find [${username}]`);
+      fetchedSkills = [];
+    } else if (response.latestSnapshot !== null && typeof response.latestSnapshot === "object") {
+      // User found
+      fetchedSkills = Object.values(response.latestSnapshot.data.skills) as RunescapeSkill[];
+      fetchedLastUsername = response.displayName;
+    } else {
+      // User found, but has no stats
+      console.warn(`[${username}] is registered on WOM but is not on the HiScores`);
+      fetchedSkills = [];
+    }
+
+    if (fetchedSkills !== null && fetchedLastUsername) {
       setSkills(fetchedSkills);
-      setLastUsername(username);
-      localStorage.setItem("lastUsername", username);
+      setLastUsername(fetchedLastUsername);
+      localStorage.setItem("lastUsername", fetchedLastUsername);
       localStorage.setItem("skills", JSON.stringify(fetchedSkills));
     } else {
       // If the fetched stats are null, clear the data and localStorage.
@@ -93,7 +110,7 @@ export default function Hiscores() {
         </button>
       </div>
 
-      {(skills.length > 0 && lastUsername) && (
+      {skills.length > 0 && lastUsername && (
         <div>
           <h2 id="hiscores-username">{lastUsername}</h2>
 
