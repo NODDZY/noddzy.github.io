@@ -10,6 +10,10 @@
   z-index: 1;
 }
 
+.yr-topbar p {
+  margin-top: 0;
+}
+
 .yr-header {
   text-align: center;
   display: flex;
@@ -24,8 +28,8 @@
   margin: 5px;
 }
 .yr-header .yr-refresh:hover {
-    color: var(--text-2);
-  }
+  color: var(--text-2);
+}
 
 .weather-table {
   margin-top: 20px;

@@ -36,8 +36,7 @@ export default function WeatherTable({ weatherData, locationName }: WeatherTable
 
       <div className="weather-text">
         <p>
-          Humidity: {weatherData.timeseries[2].data.instant.details.relative_humidity.toFixed(0)}%  ·  Wind:{" "}
-          {weatherData.timeseries[2].data.instant.details.wind_speed}m/s {degreesToCompass(weatherData.timeseries[2].data.instant.details.wind_from_direction)}
+          Humidity: {weatherData.timeseries[2].data.instant.details.relative_humidity.toFixed(0)}% · Wind: {weatherData.timeseries[2].data.instant.details.wind_speed}m/s {degreesToCompass(weatherData.timeseries[2].data.instant.details.wind_from_direction)}
         </p>
       </div>
     </div>

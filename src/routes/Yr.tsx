@@ -25,14 +25,14 @@ export default function Yr() {
     // Effect to set clickedLocation
     const storedLocation = localStorage.getItem("weather-location");
     const initialLocation: Location | null = storedLocation ? JSON.parse(storedLocation) : null;
-    setClickedLocation(initialLocation)
-    
+    setClickedLocation(initialLocation);
+
     // Effect to update the tile URL when the system theme changes
     const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
     const updateTileURL = () => {
       setTileURL(mediaQuery.matches ? baseTileURLLight : baseTileURLDark);
     };
-    
+
     mediaQuery.addEventListener("change", updateTileURL);
     return () => {
       mediaQuery.removeEventListener("change", updateTileURL);
@@ -80,20 +80,22 @@ export default function Yr() {
 
   return (
     <div className="main-element">
-      <div className="yr-header">
-        <h1>Weather Forecast</h1>
-        <div>
-          <FiRefreshCw
-            className="yr-refresh"
-            onClick={handleRefreshButton}
-          />
-          <FiMinusCircle
-            className="yr-refresh"
-            onClick={handleMinusButton}
-          />
+      <div className="yr-topbar">
+        <div className="yr-header">
+          <h1>Weather Forecast</h1>
+          <div>
+            <FiRefreshCw
+              className="yr-refresh"
+              onClick={handleRefreshButton}
+            />
+            <FiMinusCircle
+              className="yr-refresh"
+              onClick={handleMinusButton}
+            />
+          </div>
         </div>
+        <p>Click on a location on the map to see the weather forecast.</p>
       </div>
-      <p>Click on a location on the map to see the weather forecast.</p>
 
       <div className="map-container">
         <MapContainer
