@@ -34,7 +34,7 @@ export default function Sidebar() {
           <Link
             className="sidebar-text"
             to={`yr`}>
-            Yr.no Weather Forecast
+            Weather Forecast
           </Link>
         </div>
         
