@@ -20,13 +20,19 @@ export default function Yr() {
   const baseTileURLLight = "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png";
   const [tileURL, setTileURL] = useState(window.matchMedia("(prefers-color-scheme: light)").matches ? baseTileURLLight : baseTileURLDark);
 
-  // Effect to update the tile URL when the system theme changes
+  // Effect to run when component mounts
   useEffect(() => {
+    // Effect to set clickedLocation
+    const storedLocation = localStorage.getItem("weather-location");
+    const initialLocation: Location | null = storedLocation ? JSON.parse(storedLocation) : null;
+    setClickedLocation(initialLocation)
+    
+    // Effect to update the tile URL when the system theme changes
     const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
     const updateTileURL = () => {
       setTileURL(mediaQuery.matches ? baseTileURLLight : baseTileURLDark);
     };
-    // Add an event listener to detect changes in the system theme
+    
     mediaQuery.addEventListener("change", updateTileURL);
     return () => {
       mediaQuery.removeEventListener("change", updateTileURL);
@@ -64,6 +70,7 @@ export default function Yr() {
 
   function handleMinusButton() {
     setClickedLocation(null);
+    localStorage.removeItem("weather-location");
     setWeatherData(null);
     setLocationName(null);
   }
@@ -101,6 +108,7 @@ export default function Yr() {
           <MapClickHandler
             onClick={(clickedLocation) => {
               setClickedLocation(clickedLocation);
+              localStorage.setItem("weather-location", JSON.stringify(clickedLocation));
             }}
           />
           {clickedLocation && (

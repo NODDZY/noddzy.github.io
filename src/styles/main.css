@@ -187,7 +187,7 @@ a:hover {
   color: var(--highlight-dark);
 }
 
-@media (min-width: 960px) {
+@media (min-width: 985px) {
   #main {
     padding-left: var(--sidebar-width);
   }
