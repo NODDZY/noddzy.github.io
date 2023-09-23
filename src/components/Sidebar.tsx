@@ -31,6 +31,14 @@ export default function Sidebar() {
           </Link>
         </div>
         <div>
+          <Link
+            className="sidebar-text"
+            to={`yr`}>
+            Weather Forecast
+          </Link>
+        </div>
+        
+        <div>
           <p className="sidebar-text sidebar-header">Projects</p>
         </div>
         {githubItems.map((item, index) => (
