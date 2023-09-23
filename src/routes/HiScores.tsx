@@ -71,7 +71,7 @@ export default function Hiscores() {
     <tr key={skill.metric}>
       <td className="column-img">
         <img
-          src={`src/assets/runescape_skill_icons/${skill.metric}.png`}
+          src={`https://wiseoldman.net/img/runescape/icons_small/${skill.metric}.png`}
           alt={`${skill.metric} icon`}
         />
       </td>
@@ -87,9 +87,7 @@ export default function Hiscores() {
       className="main-element"
       id="hiscores">
       <h1 className="hiscores-text">Old School RuneScape HiScores</h1>
-      <p className="hiscores-text">
-        Check your Old School RuneScape progression and see where you rank in the community.
-      </p>
+      <p className="hiscores-text">Check your Old School RuneScape progression and see where you rank in the community.</p>
 
       <div id="search-row">
         <input

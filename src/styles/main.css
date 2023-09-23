@@ -187,12 +187,13 @@ a:hover {
   color: var(--highlight-dark);
 }
 
-@media (min-width: 985px) {
+@media (min-width: 960px) {
   #main {
     padding-left: var(--sidebar-width);
   }
   #header {
     background: var(--bg);
+    transition: background-color 0.5s ease;
   }
   #header-title {
     justify-content: left;
