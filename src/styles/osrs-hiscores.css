@@ -1,11 +1,5 @@
 @import "./constants.css";
 
-.hiscores-text {
-  padding: 4px;
-}
-.hiscores-text-error {
-  padding: 4px;
-}
 #hiscores-username,
 #hiscores-links {
   text-align: center;
