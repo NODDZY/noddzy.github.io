@@ -84,8 +84,7 @@ export default function Hiscores() {
 
   return (
     <div
-      className="main-element"
-      id="hiscores">
+      className="main-element">
       <h1 className="hiscores-text">Old School RuneScape HiScores</h1>
       <p className="hiscores-text">Check your Old School RuneScape progression and see where you rank in the community.</p>
 

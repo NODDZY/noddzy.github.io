@@ -33,6 +33,7 @@ body {
 }
 .main-element {
   padding: 2% 5% 5% 5%;
+  max-width: 700px;
 }
 #error {
   text-align: center;
@@ -222,9 +223,7 @@ a:hover {
     padding-right: calc((100vw - var(--layout-max-width)) / 2);
     padding-left: calc((100vw - var(--layout-max-width)) / 2 + var(--sidebar-width));
   }
-  #header {
-    padding-left: calc((100vw - var(--layout-max-width)) / 2 + var(--sidebar-width) - var(--sidebar-width));
-  }
+  #header-title,
   #sidebar {
     padding-left: max(32px, calc((100% - (var(--layout-max-width) - 64px)) / 2));
     width: calc((100% - (var(--layout-max-width) - 64px)) / 2 + var(--sidebar-width) - 32px);
