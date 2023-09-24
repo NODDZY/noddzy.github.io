@@ -22,6 +22,8 @@
   --highlight-dark: #535bf2;
   --highlight-darker: #454ce1;
   --highlight-dimm: rgba(100, 108, 255, 0.08);
+
+  --home-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 }
 
 @media (prefers-color-scheme: light) {

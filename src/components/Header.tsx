@@ -26,7 +26,7 @@ export default function Header() {
     if (!sidebar) {
       sidebar = document.getElementById("sidebar");
     }
-    
+
     window.addEventListener("resize", handleResizeWindow);
     return () => {
       window.removeEventListener("resize", handleResizeWindow);
@@ -52,7 +52,9 @@ export default function Header() {
         <Link
           id="header-title-inner"
           to={`/`}>
-          <p>Index</p>
+          <p className="name">
+            <span className="clip">▙ ▚ ∞ ▞ ▟</span>
+          </p>
         </Link>
       </div>
       <div id="header-content"></div>
