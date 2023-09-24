@@ -1,5 +1,5 @@
 import { WeatherData } from "../services/yr/interface";
-import { degreesToCompass, getDayAsString } from "../services/yr/utils";
+import { degreesToCardinal, getDayAsString, msToKph } from "../services/yr/utils";
 
 interface WeatherTableProps {
   weatherData: WeatherData;
@@ -36,7 +36,7 @@ export default function WeatherTable({ weatherData, locationName }: WeatherTable
 
       <div className="weather-text">
         <p>
-          Humidity: {weatherData.timeseries[2].data.instant.details.relative_humidity.toFixed(0)}% · Wind: {weatherData.timeseries[2].data.instant.details.wind_speed}m/s {degreesToCompass(weatherData.timeseries[2].data.instant.details.wind_from_direction)}
+          Humidity: {weatherData.timeseries[2].data.instant.details.relative_humidity.toFixed(0)}% · Wind: {msToKph(weatherData.timeseries[2].data.instant.details.wind_speed).toFixed(0)} KPH {degreesToCardinal(weatherData.timeseries[2].data.instant.details.wind_from_direction)}
         </p>
       </div>
     </div>
