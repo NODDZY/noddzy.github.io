@@ -16,8 +16,8 @@ export default function Yr() {
   const [forceRefresh, setForceRefresh] = useState(false);
 
   // Define URLs for map tiles based on color scheme
-  const baseTileURLDark = "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
-  const baseTileURLLight = "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png";
+  const baseTileURLDark = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const baseTileURLLight = baseTileURLDark;
   const [tileURL, setTileURL] = useState(window.matchMedia("(prefers-color-scheme: light)").matches ? baseTileURLLight : baseTileURLDark);
 
   // Effect to run when component mounts
@@ -105,7 +105,7 @@ export default function Yr() {
           <TileLayer
             noWrap={true}
             url={tileURL}
-            attribution='<a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> | <a href="https://www.openstreetmap.org/copyright"  target="_blank">OpenStreetMap</a>'
+            attribution='<a href="https://www.openstreetmap.org/copyright"  target="_blank">OpenStreetMap</a>'
           />
           <MapClickHandler
             onClick={(clickedLocation) => {
