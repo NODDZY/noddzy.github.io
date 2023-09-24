@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import "./styles/main.css";
 
 import MainPage from "./pages/MainPage";
@@ -10,7 +10,7 @@ import Index from "./routes/Index";
 import Hiscores from "./routes/HiScores";
 import Yr from "./routes/Yr";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <MainPage />,
