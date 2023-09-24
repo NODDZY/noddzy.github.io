@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
-import { fetchRunescapeUser } from "../services/api";
+import { fetchRunescapeUser } from "../services/osrs/api";
 import { FiSearch } from "react-icons/fi";
-import { RunescapeSkill } from "../services/interfaces";
 import "../styles/osrs-hiscores.css";
+
+interface RunescapeSkill {
+  metric: string;
+  experience: number;
+  rank: number;
+  level: number;
+}
 
 export default function Hiscores() {
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
@@ -83,8 +89,7 @@ export default function Hiscores() {
   ));
 
   return (
-    <div
-      className="main-element">
+    <div className="main-element">
       <h1 className="hiscores-text">Old School RuneScape HiScores</h1>
       <p className="hiscores-text">Check your Old School RuneScape progression and see where you rank in the community.</p>
 

@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { ProjectItemProp } from "../services/interfaces";
+
+interface ProjectItemProp {
+  title: string;
+  description: string;
+  link: string;
+}
 
 const ProjectItem = ({ title, description, link }: ProjectItemProp) => (
   <div>
@@ -37,7 +42,7 @@ export default function Sidebar() {
             Weather Forecast
           </Link>
         </div>
-        
+
         <div>
           <p className="sidebar-text sidebar-header">Projects</p>
         </div>
@@ -70,8 +75,7 @@ const githubItems = [
   },
   {
     title: "Herb Patch Overlay",
-    description:
-      "RuneLite plugin. Renders colored overlays on herb patches to easily see if herb is ready to be harvested.",
+    description: "RuneLite plugin. Renders colored overlays on herb patches to easily see if herb is ready to be harvested.",
     link: "https://github.com/NODDZY/herbpatch-overlay"
   },
   {
