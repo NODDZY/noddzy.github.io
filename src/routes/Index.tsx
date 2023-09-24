@@ -7,7 +7,7 @@ export default function Index() {
       <p className="index-text">Explore various projects, demos, and more as you navigate through the site.</p>
       <br />
       <p className="index-text">Single page application made with React + Vite and TypeScript.</p>
-      <p className="index-text">Static website deployed to GitHub Pages.</p>
+      <p className="index-text">Serverless static website deployed to GitHub Pages.</p>
 
       <div id="jaina-quote">
         <p className="jaina-text">Arguably, it (that is, some object) exists.</p>
