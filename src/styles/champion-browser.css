@@ -1,6 +1,11 @@
 @import "./constants.css";
 
+.filters {
+    display: flex;
+}
+
 .champion-grid {
+  padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
   gap: 15px;
