@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { fetchChampionData, fetchCurrentVersion } from "../services/league/api";
 import { capitalizeFirstLetter } from "../services/league/utils";
 import ChampionSearchBar from "../components/ChampionSearchBar";
@@ -8,6 +8,8 @@ export default function ChampionBrowser() {
   const [version, setVersion] = useState<string | null>(null);
   const [champions, setChampions] = useState<Champion[] | null>(null);
 
+  const [search, setSearch] = useState<string>("");
+  const [selectedClass, setSelectedClass] = useState<string>("all");
   const [filteredChampions, setFilteredChampions] = useState<Champion[] | null>(null);
 
   useEffect(() => {
@@ -16,19 +18,33 @@ export default function ChampionBrowser() {
       setVersion(currentVersion);
       if (currentVersion) {
         const currentChampions = await fetchChampionData(currentVersion);
-        setChampions(currentChampions);
-        setFilteredChampions(currentChampions);
+        const currentChampionsList: Champion[] = Object.values(currentChampions);
+        setChampions(currentChampionsList);
+        setFilteredChampions(currentChampionsList);
       }
     }
 
     fetchList();
   }, []);
 
-  const handleSearch = (searchTerm: string) => {
+  useEffect(() => {
     if (champions) {
-      const filtered = Object.values(champions).filter((champion) => champion.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      const filtered = champions.filter((champion) => {
+        const nameMatch = champion.name.toLowerCase().includes(search.toLowerCase());
+        const tagMatch = champion.tags.some((tag) => tag.toLowerCase() === selectedClass.toLowerCase() || selectedClass.toLowerCase() === "");
+        return nameMatch && tagMatch;
+      });
       setFilteredChampions(filtered);
     }
+  }, [search, selectedClass]);
+
+  const handleSearch = (searchTerm: string) => {
+    setSearch(searchTerm);
+  };
+
+  const handleClassSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedClass = event.target.value;
+    setSelectedClass(selectedClass);
   };
 
   return (
@@ -36,11 +52,25 @@ export default function ChampionBrowser() {
       <h1>League Champion Browser</h1>
       <p>Browse all League of Legends champions for the current patch.</p>
 
-      <ChampionSearchBar onSearch={handleSearch} />
+      <div className="filter-row">
+        <ChampionSearchBar onSearch={handleSearch} />
+
+        <select
+          id="championClass"
+          onChange={handleClassSelect}>
+          <option value="">All</option>
+          <option value="assassin">Assassin</option>
+          <option value="fighter">Fighter</option>
+          <option value="mage">Mage</option>
+          <option value="marksman">Marksman</option>
+          <option value="support">Support</option>
+          <option value="tank">Tank</option>
+        </select>
+      </div>
 
       <div className="champion-grid">
         {filteredChampions &&
-          Object.values(filteredChampions).map((champion) => (
+          filteredChampions.map((champion) => (
             <a
               key={champion.key}
               className="champion-item"

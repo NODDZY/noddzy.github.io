@@ -1,6 +1,6 @@
 @import "./constants.css";
 
-.filters {
+.filter-row {
     display: flex;
 }
 
