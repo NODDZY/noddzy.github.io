@@ -1,0 +1,43 @@
+@import "./constants.css";
+
+.filter-row {
+    display: flex;
+}
+
+.champion-grid {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
+  gap: 15px;
+}
+
+.champion-item {
+  text-align: center;
+  background-color: var(--bg-soft);
+  border: 1px solid var(--bg-soft-mute);
+  padding: 10px;
+  border-radius: 0px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.champion-item:hover {
+  transform: scale(1.05);
+}
+
+.champion-image img {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 50%;
+  height: auto;
+}
+
+.champion-name {
+  color: var(--text-1);
+  font-weight: bold;
+}
+
+.champion-title {
+  color: var(--text-2);
+  font-size: small;
+}

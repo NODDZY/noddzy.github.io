@@ -9,6 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Index from "./routes/Index";
 import Hiscores from "./routes/HiScores";
 import Yr from "./routes/Yr";
+import ChampionBrowser from "./routes/ChampionBrowser"
 
 const router = createHashRouter([
   {
@@ -18,7 +19,8 @@ const router = createHashRouter([
     children: [
       { index: true, element: <Index /> },
       { path: "hiscores", element: <Hiscores /> },
-      { path: "yr", element: <Yr /> }
+      { path: "yr", element: <Yr /> },
+      { path: "lol-champions", element: <ChampionBrowser /> }
     ]
   }
 ]);

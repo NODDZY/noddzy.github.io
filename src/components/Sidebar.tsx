@@ -42,6 +42,13 @@ export default function Sidebar() {
             Weather Forecast
           </Link>
         </div>
+        <div>
+          <Link
+            className="sidebar-text"
+            to={`lol-champions`}>
+            Champion Browser
+          </Link>
+        </div>
 
         <div>
           <p className="sidebar-text sidebar-header">Projects</p>
