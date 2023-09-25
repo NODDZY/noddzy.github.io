@@ -9,7 +9,7 @@ export default function ChampionBrowser() {
   const [champions, setChampions] = useState<Champion[] | null>(null);
 
   const [search, setSearch] = useState<string>("");
-  const [selectedClass, setSelectedClass] = useState<string>("all");
+  const [selectedClass, setSelectedClass] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[] | null>(null);
 
   useEffect(() => {
