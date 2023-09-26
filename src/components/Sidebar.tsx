@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SidebarProps } from "../pages/MainPage";
 
 interface ProjectItemProp {
   title: string;
@@ -6,20 +7,27 @@ interface ProjectItemProp {
   link: string;
 }
 
-const ProjectItem = ({ title, description, link }: ProjectItemProp) => (
-  <div>
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="sidebar-text"
-      title={description}>
-      {title}
-    </a>
-  </div>
-);
+export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps) {
+  function handleSidebarClick() {
+    if (sidebarExpanded) {
+      toggleSidebar();
+    }
+  }
 
-export default function Sidebar() {
+  const ProjectItem = ({ title, description, link }: ProjectItemProp) => (
+    <div>
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="sidebar-text"
+        onClick={toggleSidebar}
+        title={description}>
+        {title}
+      </a>
+    </div>
+  );
+
   return (
     <aside
       id="sidebar"
@@ -31,6 +39,7 @@ export default function Sidebar() {
         <div>
           <Link
             className="sidebar-text"
+            onClick={handleSidebarClick}
             to={`hiscores`}>
             OSRS HiScores
           </Link>
@@ -38,6 +47,7 @@ export default function Sidebar() {
         <div>
           <Link
             className="sidebar-text"
+            onClick={handleSidebarClick}
             to={`yr`}>
             Weather Forecast
           </Link>
@@ -45,6 +55,7 @@ export default function Sidebar() {
         <div>
           <Link
             className="sidebar-text"
+            onClick={handleSidebarClick}
             to={`lol-champions`}>
             Champion Browser
           </Link>
@@ -65,6 +76,7 @@ export default function Sidebar() {
             className="sidebar-text"
             href="https://github.com/NODDZY"
             target="_blank"
+            onClick={toggleSidebar}
             rel="noopener noreferrer">
             GitHub Account
           </a>

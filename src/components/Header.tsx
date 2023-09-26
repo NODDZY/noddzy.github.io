@@ -1,41 +1,11 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiAlignLeft } from "react-icons/fi";
+import { SidebarProps } from "../pages/MainPage";
 
-export default function Header() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-  const BREAKPOINT = 960;
-
-  let sidebar = document.getElementById("sidebar");
-
-  const toggleSidebar = () => {
-    sidebar!.classList.toggle("sidebar-open");
-    setSidebarExpanded(!sidebarExpanded);
-  };
-
-  const handleResizeWindow = () => {
-    setWidth(window.innerWidth);
-
-    if (width >= BREAKPOINT && sidebarExpanded) {
-      toggleSidebar();
-    }
-  };
-
-  useEffect(() => {
-    if (!sidebar) {
-      sidebar = document.getElementById("sidebar");
-    }
-
-    window.addEventListener("resize", handleResizeWindow);
-    return () => {
-      window.removeEventListener("resize", handleResizeWindow);
-    };
-  }, [width, sidebarExpanded]);
-
+export default function Header({ sidebarExpanded, underBreakpoint, toggleSidebar }: SidebarProps) {
   return (
     <header id="header">
-      {width < BREAKPOINT && (
+      {underBreakpoint && (
         <div
           id="hamburger-menu"
           onClick={toggleSidebar}>
@@ -43,11 +13,13 @@ export default function Header() {
           <span>Menu</span>
         </div>
       )}
-      {sidebarExpanded && width < BREAKPOINT && (
+
+      {sidebarExpanded && underBreakpoint && (
         <div
           className="backdrop"
           onClick={toggleSidebar}></div>
       )}
+
       <div id="header-title">
         <Link
           id="header-title-inner"
@@ -57,7 +29,6 @@ export default function Header() {
           </p>
         </Link>
       </div>
-      <div id="header-content"></div>
     </header>
   );
 }
