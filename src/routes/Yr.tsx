@@ -17,17 +17,17 @@ export default function Yr() {
 
   // Define URLs for map tiles based on color scheme
   const baseTileURLDark = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-  const baseTileURLLight = baseTileURLDark;
+  const baseTileURLLight = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   const [tileURL, setTileURL] = useState(window.matchMedia("(prefers-color-scheme: light)").matches ? baseTileURLLight : baseTileURLDark);
 
-  // Effect to run when component mounts
+  // Effect to run once when component mounts
   useEffect(() => {
-    // Effect to set clickedLocation
+    // Set initial clickedLocation
     const storedLocation = localStorage.getItem("weather-location");
     const initialLocation: Location | null = storedLocation ? JSON.parse(storedLocation) : null;
     setClickedLocation(initialLocation);
 
-    // Effect to update the tile URL when the system theme changes
+    // Update the tile URL when the system theme changes
     const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
     const updateTileURL = () => {
       setTileURL(mediaQuery.matches ? baseTileURLLight : baseTileURLDark);
@@ -58,22 +58,29 @@ export default function Yr() {
   }, [clickedLocation, forceRefresh]);
 
   // Event handler component for map clicks
-  function MapClickHandler({ onClick }: { onClick: (e: any) => void }) {
+  function MapClickHandler() {
     useMapEvents({
       click: (e) => {
-        const { lat, lng } = e.latlng;
-        onClick({ lat, lng });
+        const clickedLocation = {
+          lat: e.latlng.lat,
+          lng: e.latlng.lng
+        } as Location;
+        setClickedLocation(clickedLocation);
+        localStorage.setItem("weather-location", JSON.stringify(clickedLocation));
       }
     });
     return null;
   }
 
+  // Function to remove current location
   function handleMinusButton() {
     setClickedLocation(null);
     localStorage.removeItem("weather-location");
     setWeatherData(null);
     setLocationName(null);
   }
+
+  // Function to refresh forecast for current location
   function handleRefreshButton() {
     setForceRefresh((prevForceRefresh) => !prevForceRefresh);
   }
@@ -107,12 +114,9 @@ export default function Yr() {
             url={tileURL}
             attribution='<a href="https://www.openstreetmap.org/copyright"  target="_blank">OpenStreetMap</a>'
           />
-          <MapClickHandler
-            onClick={(clickedLocation) => {
-              setClickedLocation(clickedLocation);
-              localStorage.setItem("weather-location", JSON.stringify(clickedLocation));
-            }}
-          />
+
+          <MapClickHandler />
+
           {clickedLocation && (
             <CircleMarker
               center={[clickedLocation.lat, clickedLocation.lng]}

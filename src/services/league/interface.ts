@@ -1,4 +1,4 @@
-interface Champion {
+export interface Champion {
   id: string;
   key: string;
   blurb: string;

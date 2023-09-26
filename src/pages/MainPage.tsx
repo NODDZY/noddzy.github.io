@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 
 import Header from "../components/Header";
@@ -12,22 +12,22 @@ export interface SidebarProps {
 
 export default function Root() {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
-  
+
   const BREAKPOINT = 960;
-  const [width, setWidth] = useState(window.innerWidth);
   const [underBreakpoint, setUnderBreakpoint] = useState(window.innerWidth < BREAKPOINT);
 
-  let sidebar = document.getElementById("sidebar");
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   const toggleSidebar = () => {
-    sidebar!.classList.toggle("sidebar-open");
+    if (sidebarRef.current) {
+      sidebarRef.current.classList.toggle("sidebar-open");
+    }
     setSidebarExpanded(!sidebarExpanded);
   };
 
   const handleResizeWindow = () => {
-    const currentWidth = window.innerWidth;
-    setWidth(currentWidth);
-    setUnderBreakpoint(currentWidth < BREAKPOINT);
+    const width = window.innerWidth;
+    setUnderBreakpoint(width < BREAKPOINT);
 
     if (!underBreakpoint && sidebarExpanded) {
       toggleSidebar();
@@ -35,15 +35,13 @@ export default function Root() {
   };
 
   useEffect(() => {
-    if (!sidebar) {
-      sidebar = document.getElementById("sidebar");
-    }
+    sidebarRef.current = document.getElementById("sidebar") as HTMLDivElement;
 
     window.addEventListener("resize", handleResizeWindow);
     return () => {
       window.removeEventListener("resize", handleResizeWindow);
     };
-  }, [width, sidebarExpanded]);
+  });
 
   return (
     <>

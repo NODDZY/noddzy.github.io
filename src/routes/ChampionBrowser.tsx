@@ -1,7 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
+
 import { fetchChampionData, fetchCurrentVersion } from "../services/league/api";
 import { capitalizeFirstLetter } from "../services/league/utils";
-import ChampionSearchBar from "../components/ChampionSearchBar";
+import { Champion } from "../services/league/interface";
+
 import "../styles/champion-browser.css";
 
 export default function ChampionBrowser() {
@@ -12,7 +14,9 @@ export default function ChampionBrowser() {
   const [selectedClass, setSelectedClass] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[] | null>(null);
 
+  // Effect to run once when component mounts
   useEffect(() => {
+    // Fetch champion list for current patch
     async function fetchList() {
       const currentVersion = await fetchCurrentVersion();
       setVersion(currentVersion);
@@ -27,6 +31,7 @@ export default function ChampionBrowser() {
     fetchList();
   }, []);
 
+  // Effect to filter champions based on user input
   useEffect(() => {
     if (champions) {
       const filtered = champions.filter((champion) => {
@@ -36,12 +41,15 @@ export default function ChampionBrowser() {
       });
       setFilteredChampions(filtered);
     }
-  }, [search, selectedClass]);
+  }, [search, selectedClass, champions]);
 
-  const handleSearch = (searchTerm: string) => {
-    setSearch(searchTerm);
+  // Set search input string
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearch(value);
   };
 
+  // Set class input
   const handleClassSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedClass = event.target.value;
     setSelectedClass(selectedClass);
@@ -53,7 +61,12 @@ export default function ChampionBrowser() {
       <p>Browse all League of Legends champions for the current patch.</p>
 
       <div className="filter-row">
-        <ChampionSearchBar onSearch={handleSearch} />
+        <input
+          type="text"
+          placeholder="Search champions..."
+          value={search}
+          onChange={handleSearch}
+        />
 
         <select
           id="championClass"

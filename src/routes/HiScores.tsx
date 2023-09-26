@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchRunescapeUser } from "../services/osrs/api";
 import { FiSearch } from "react-icons/fi";
+
+import { fetchRunescapeUser } from "../services/osrs/api";
+
 import "../styles/osrs-hiscores.css";
 
 interface RunescapeSkill {
@@ -15,6 +17,7 @@ export default function Hiscores() {
   const [username, setUsername] = useState<string>("");
   const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("lastUsername") || null);
 
+  // Effect to run once when component mounts
   useEffect(() => {
     // Load lastUsername and skills from localStorage when the component mounts.
     const storedUsername = localStorage.getItem("lastUsername");
@@ -27,12 +30,12 @@ export default function Hiscores() {
 
   const search = async () => {
     if (username.toLowerCase() === lastUsername?.toLowerCase()) {
-      // Don't search again if the username is the same as the last search.
+      // Dont search again if the username is the same as the last search
       return;
     }
 
     if (!username) {
-      // If the username is empty, clear the data and localStorage.
+      // If the username is empty, clear the data and localStorage
       setSkills([]);
       setLastUsername(null);
       localStorage.removeItem("lastUsername");
@@ -65,7 +68,7 @@ export default function Hiscores() {
       localStorage.setItem("lastUsername", fetchedLastUsername);
       localStorage.setItem("skills", JSON.stringify(fetchedSkills));
     } else {
-      // If the fetched stats are null, clear the data and localStorage.
+      // If the fetched stats are null, clear data
       setSkills([]);
       setLastUsername(null);
       localStorage.removeItem("lastUsername");
