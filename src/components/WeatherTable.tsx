@@ -1,5 +1,5 @@
-import { WeatherData } from "../services/yr/interface";
-import { degreesToCardinal, getDayAsString, msToKph } from "../services/yr/utils";
+import { WeatherData } from "../services/weather/interface";
+import { degreesToCardinal, getDayAsString, msToKph } from "../services/weather/utils";
 
 interface WeatherTableProps {
   weatherData: WeatherData;

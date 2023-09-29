@@ -48,7 +48,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
           <Link
             className="sidebar-text"
             onClick={handleSidebarClick}
-            to={`yr`}>
+            to={`forecast`}>
             Weather Forecast
           </Link>
         </div>

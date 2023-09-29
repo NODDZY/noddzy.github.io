@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-import { fetchRunescapeUser } from "../services/osrs/api";
+import { SKILL_ICON_URL, WOM_URL, HISCORE_URL, fetchRunescapeUser } from "../services/osrs/api";
 
 import "../styles/osrs-hiscores.css";
 
@@ -80,7 +80,7 @@ export default function Hiscores() {
     <tr key={skill.metric}>
       <td className="column-img">
         <img
-          src={`https://wiseoldman.net/img/runescape/icons_small/${skill.metric}.png`}
+          src={SKILL_ICON_URL(skill.metric)}
           alt={`${skill.metric} icon`}
         />
       </td>
@@ -133,9 +133,17 @@ export default function Hiscores() {
           </table>
 
           <p id="hiscores-links">
-            <a href={`https://secure.runescape.com/m=hiscore_oldschool/hiscorepersonal?user1=${encodeURI(lastUsername)}`}>Official HiScores</a>
+            <a
+              href={HISCORE_URL(lastUsername)}
+              target="_blank">
+              Official HiScores
+            </a>
             ·
-            <a href={`https://wiseoldman.net/players/${encodeURI(lastUsername)}`}>Wise Old Man</a>
+            <a
+              href={WOM_URL(lastUsername)}
+              target="_blank">
+              Wise Old Man
+            </a>
           </p>
         </div>
       )}

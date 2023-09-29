@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
-import { fetchChampionData, fetchCurrentVersion } from "../services/league/api";
+import { fetchChampionData, fetchCurrentVersion, UNIVERSE_URL, ICON_URL } from "../services/league/api";
 import { capitalizeFirstLetter } from "../services/league/utils";
 import { Champion } from "../services/league/interface";
 
@@ -87,11 +87,11 @@ export default function ChampionBrowser() {
             <a
               key={champion.key}
               className="champion-item"
-              href={`https://universe.leagueoflegends.com/en_US/champion/${champion.id.toLowerCase()}/`}
+              href={UNIVERSE_URL(champion.id)}
               target="_blank">
               <div className="champion-image">
                 <img
-                  src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`}
+                  src={ICON_URL(version!, champion.id)}
                   alt={`${champion.id.toLowerCase()}.png`}
                 />
               </div>

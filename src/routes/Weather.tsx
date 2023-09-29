@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, useMapEvents } from "react-leaflet";
 import { FiRefreshCw, FiMinusCircle } from "react-icons/fi";
 
-import { fetchWeatherForecast, reverseGeocode } from "../services/yr/api";
-import { Location, WeatherData } from "../services/yr/interface";
+import { fetchWeatherForecast, reverseGeocode } from "../services/weather/api";
+import { Location, WeatherData } from "../services/weather/interface";
 import WeatherTable from "../components/WeatherTable";
 
 import "leaflet/dist/leaflet.css";
