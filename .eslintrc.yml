@@ -8,6 +8,7 @@ extends:
   - "plugin:react-hooks/recommended"
 ignorePatterns:
   - "dist"
+  - "**/*.test.ts"
 parser: "@typescript-eslint/parser"
 plugins:
   - "react-refresh"
