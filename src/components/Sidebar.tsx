@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+
 import { SidebarProps } from "../pages/MainPage";
+import projects from "../assets/projects.json";
 
 interface ProjectItemProp {
   title: string;
@@ -64,7 +66,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         <div>
           <p className="sidebar-text sidebar-header">Projects</p>
         </div>
-        {githubItems.map((item, index) => (
+        {projects.map((item, index) => (
           <ProjectItem
             key={index}
             {...item}
@@ -85,31 +87,3 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
     </aside>
   );
 }
-
-const githubItems = [
-  {
-    title: "Visual NPC Dialogue",
-    description: "RuneLite Plugin. Adds dialogue to the chatbox and above NPCs heads.",
-    link: "https://github.com/NODDZY/visual-npc-dialogue"
-  },
-  {
-    title: "Herb Patch Overlay",
-    description: "RuneLite plugin. Renders colored overlays on herb patches to easily see if herb is ready to be harvested.",
-    link: "https://github.com/NODDZY/herbpatch-overlay"
-  },
-  {
-    title: "Sourcerunner Python",
-    description: "Static website to safely (compile and) run python source code using virtualization.",
-    link: "https://github.com/NODDZY/sourcerunner-py"
-  },
-  {
-    title: "Updater Scripts",
-    description: "Collection of batch scripts to download/update various portable applications on Windows.",
-    link: "https://github.com/NODDZY/updater-scripts"
-  },
-  {
-    title: "Romhacking",
-    description: "Miscellaneous romhacks.",
-    link: "https://github.com/NODDZY/romhacking"
-  }
-];
