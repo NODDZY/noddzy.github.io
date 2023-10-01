@@ -40,6 +40,7 @@ body {
   padding-top: 25vh;
 }
 
+/* Title */
 .name {
   color: transparent;
   text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.4);
@@ -47,7 +48,7 @@ body {
 .title {
   font-size: 58px;
   max-width: 370px;
-  min-width: 370px;
+  min-width: 330px;
   overflow-wrap: break-word;
 }
 .clip {
@@ -60,18 +61,6 @@ body {
 .index-text {
   margin: 0px;
   color: var(--text-2);
-}
-
-#jaina-quote {
-  width: 100%;
-  padding-bottom: 20px;
-  padding-top: 80px;
-  animation: fade-in 0.5s ease forwards;
-}
-.jaina-text {
-  color: var(--text-3);
-  margin: 0 0 2px 3px;
-  font-size: 14px;
 }
 
 /* Components */
@@ -207,8 +196,7 @@ input {
 select {
   border-radius: 0px;
   border: 1px solid transparent;
-  margin-left: 5px;
-  padding-left: 15px;
+  padding: 0.6em 1.2em;
   outline: 0px;
   font-size: 1em;
   font-weight: 500;

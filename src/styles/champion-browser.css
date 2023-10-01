@@ -1,7 +1,7 @@
-@import "./constants.css";
-
 .filter-row {
-    display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .champion-grid {
@@ -21,7 +21,6 @@
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
-
 .champion-item:hover {
   transform: scale(1.05);
 }
@@ -31,12 +30,10 @@
   max-width: 50%;
   height: auto;
 }
-
 .champion-name {
   color: var(--text-1);
   font-weight: bold;
 }
-
 .champion-title {
   color: var(--text-2);
   font-size: small;
