@@ -21,7 +21,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         target="_blank"
         rel="noopener noreferrer"
         className="sidebar-text"
-        onClick={toggleSidebar}
+        onClick={handleSidebarClick}
         title={description}>
         {title}
       </a>
@@ -76,7 +76,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
             className="sidebar-text"
             href="https://github.com/NODDZY"
             target="_blank"
-            onClick={toggleSidebar}
+            onClick={handleSidebarClick}
             rel="noopener noreferrer">
             GitHub Account
           </a>
