@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 import { SidebarProps } from "../pages/MainPage";
+import projects from "../assets/projects.json";
 
 interface ProjectItemProp {
   title: string;
@@ -8,11 +10,23 @@ interface ProjectItemProp {
 }
 
 export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps) {
+  const location = useLocation();
+
+  const routes = [
+    { to: "hiscores", text: "OSRS HiScores" },
+    { to: "forecast", text: "Weather Forecast" },
+    { to: "lol-champions", text: "Champion Browser" }
+  ];
+
   function handleSidebarClick() {
     if (sidebarExpanded) {
       toggleSidebar();
     }
   }
+
+  const isActiveLink = (path: string) => {
+    return location.pathname === `/${path}`;
+  };
 
   const ProjectItem = ({ title, description, link }: ProjectItemProp) => (
     <div>
@@ -21,7 +35,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         target="_blank"
         rel="noopener noreferrer"
         className="sidebar-text"
-        onClick={toggleSidebar}
+        onClick={handleSidebarClick}
         title={description}>
         {title}
       </a>
@@ -36,35 +50,21 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         <div>
           <p className="sidebar-text sidebar-header">Routes</p>
         </div>
-        <div>
-          <Link
-            className="sidebar-text"
-            onClick={handleSidebarClick}
-            to={`hiscores`}>
-            OSRS HiScores
-          </Link>
-        </div>
-        <div>
-          <Link
-            className="sidebar-text"
-            onClick={handleSidebarClick}
-            to={`forecast`}>
-            Weather Forecast
-          </Link>
-        </div>
-        <div>
-          <Link
-            className="sidebar-text"
-            onClick={handleSidebarClick}
-            to={`lol-champions`}>
-            Champion Browser
-          </Link>
-        </div>
+        {routes.map((link) => (
+          <div key={link.to}>
+            <Link
+              className={`sidebar-text${isActiveLink(link.to) ? " active-link" : ""}`}
+              onClick={handleSidebarClick}
+              to={link.to}>
+              {link.text}
+            </Link>
+          </div>
+        ))}
 
         <div>
           <p className="sidebar-text sidebar-header">Projects</p>
         </div>
-        {githubItems.map((item, index) => (
+        {projects.map((item, index) => (
           <ProjectItem
             key={index}
             {...item}
@@ -76,7 +76,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
             className="sidebar-text"
             href="https://github.com/NODDZY"
             target="_blank"
-            onClick={toggleSidebar}
+            onClick={handleSidebarClick}
             rel="noopener noreferrer">
             GitHub Account
           </a>
@@ -85,31 +85,3 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
     </aside>
   );
 }
-
-const githubItems = [
-  {
-    title: "Visual NPC Dialogue",
-    description: "RuneLite Plugin. Adds dialogue to the chatbox and above NPCs heads.",
-    link: "https://github.com/NODDZY/visual-npc-dialogue"
-  },
-  {
-    title: "Herb Patch Overlay",
-    description: "RuneLite plugin. Renders colored overlays on herb patches to easily see if herb is ready to be harvested.",
-    link: "https://github.com/NODDZY/herbpatch-overlay"
-  },
-  {
-    title: "Sourcerunner Python",
-    description: "Static website to safely (compile and) run python source code using virtualization.",
-    link: "https://github.com/NODDZY/sourcerunner-py"
-  },
-  {
-    title: "Updater Scripts",
-    description: "Collection of batch scripts to download/update various portable applications on Windows.",
-    link: "https://github.com/NODDZY/updater-scripts"
-  },
-  {
-    title: "Romhacking",
-    description: "Miscellaneous romhacks.",
-    link: "https://github.com/NODDZY/romhacking"
-  }
-];

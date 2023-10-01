@@ -150,6 +150,9 @@ body {
   direction: ltr;
   font-synthesis: style;
 }
+.active-link {
+  color: var(--highlight);
+}
 .sidebar-header {
   padding-top: 10px;
   font-weight: bold;
