@@ -11,6 +11,13 @@ interface ProjectItemProp {
 
 export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps) {
   const location = useLocation();
+
+  const routes = [
+    { to: "hiscores", text: "OSRS HiScores" },
+    { to: "forecast", text: "Weather Forecast" },
+    { to: "lol-champions", text: "Champion Browser" }
+  ];
+
   function handleSidebarClick() {
     if (sidebarExpanded) {
       toggleSidebar();
@@ -43,30 +50,16 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         <div>
           <p className="sidebar-text sidebar-header">Routes</p>
         </div>
-        <div>
-          <Link
-            className={`sidebar-text${isActiveLink("hiscores") ? " active-link" : ""}`}
-            onClick={handleSidebarClick}
-            to={`hiscores`}>
-            OSRS HiScores
-          </Link>
-        </div>
-        <div>
-          <Link
-            className={`sidebar-text${isActiveLink("forecast") ? " active-link" : ""}`}
-            onClick={handleSidebarClick}
-            to={`forecast`}>
-            Weather Forecast
-          </Link>
-        </div>
-        <div>
-          <Link
-            className={`sidebar-text${isActiveLink("lol-champions") ? " active-link" : ""}`}
-            onClick={handleSidebarClick}
-            to={`lol-champions`}>
-            Champion Browser
-          </Link>
-        </div>
+        {routes.map((link) => (
+          <div key={link.to}>
+            <Link
+              className={`sidebar-text${isActiveLink(link.to) ? " active-link" : ""}`}
+              onClick={handleSidebarClick}
+              to={link.to}>
+              {link.text}
+            </Link>
+          </div>
+        ))}
 
         <div>
           <p className="sidebar-text sidebar-header">Projects</p>
