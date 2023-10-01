@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { SidebarProps } from "../pages/MainPage";
 import projects from "../assets/projects.json";
@@ -10,11 +10,16 @@ interface ProjectItemProp {
 }
 
 export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps) {
+  const location = useLocation();
   function handleSidebarClick() {
     if (sidebarExpanded) {
       toggleSidebar();
     }
   }
+
+  const isActiveLink = (path: string) => {
+    return location.pathname === `/${path}`;
+  };
 
   const ProjectItem = ({ title, description, link }: ProjectItemProp) => (
     <div>
@@ -40,7 +45,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         </div>
         <div>
           <Link
-            className="sidebar-text"
+            className={`sidebar-text${isActiveLink("hiscores") ? " active-link" : ""}`}
             onClick={handleSidebarClick}
             to={`hiscores`}>
             OSRS HiScores
@@ -48,7 +53,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         </div>
         <div>
           <Link
-            className="sidebar-text"
+            className={`sidebar-text${isActiveLink("forecast") ? " active-link" : ""}`}
             onClick={handleSidebarClick}
             to={`forecast`}>
             Weather Forecast
@@ -56,7 +61,7 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
         </div>
         <div>
           <Link
-            className="sidebar-text"
+            className={`sidebar-text${isActiveLink("lol-champions") ? " active-link" : ""}`}
             onClick={handleSidebarClick}
             to={`lol-champions`}>
             Champion Browser
