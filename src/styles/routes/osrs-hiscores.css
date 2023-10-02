@@ -1,11 +1,12 @@
-#hiscores-username,
-#hiscores-links {
+/* Base */
+#hiscores-text {
   text-align: center;
 }
-#hiscores-links a {
+#hiscores-text a {
   margin: 0 10px;
 }
 
+/* Search row */
 #search-row {
   margin-bottom: 2%;
   padding-bottom: 2%;
@@ -18,11 +19,11 @@
   border-radius: 0px 5px 5px 0px;
 }
 
+/* Skill table */
 #skill-table {
   width: 100%;
   border-collapse: collapse;
 }
-
 .column {
   text-align: right;
 }

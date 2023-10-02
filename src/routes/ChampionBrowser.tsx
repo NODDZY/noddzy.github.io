@@ -4,7 +4,7 @@ import { fetchChampionData, fetchCurrentVersion, UNIVERSE_URL, ICON_URL } from "
 import { capitalizeFirstLetter } from "../services/league/utils";
 import { Champion } from "../services/league/interface";
 
-import "../styles/champion-browser.css";
+import "../styles/routes/champion-browser.css";
 
 export default function ChampionBrowser() {
   const [version, setVersion] = useState<string | null>(null);

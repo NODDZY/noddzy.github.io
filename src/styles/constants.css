@@ -23,6 +23,10 @@
   --highlight-darker: #454ce1;
   --highlight-dimm: rgba(100, 108, 255, 0.08);
 
+  --shadow-box-1: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  --shadow-box-2: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  --shadow-text: 0px 0px 40px rgba(0, 0, 0, 0.4);
+
   --home-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 }
 

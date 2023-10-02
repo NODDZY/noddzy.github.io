@@ -1,16 +1,17 @@
+/* Search row */
 .filter-row {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
 }
 
+/* Main grid */
 .champion-grid {
   padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
   gap: 15px;
 }
-
 .champion-item {
   text-align: center;
   background-color: var(--bg-soft);
@@ -19,14 +20,13 @@
   border-radius: 0px;
   transition: transform 0.2s;
   cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-box-1);
 }
 .champion-item:hover {
   transform: scale(1.05);
 }
-
 .champion-image img {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-box-1);
   max-width: 50%;
   height: auto;
 }

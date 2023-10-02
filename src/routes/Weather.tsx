@@ -7,9 +7,9 @@ import { Location, WeatherData } from "../services/weather/interface";
 import WeatherTable from "../components/WeatherTable";
 
 import "leaflet/dist/leaflet.css";
-import "../styles/yr.css";
+import "../styles/routes/weather-forecast.css";
 
-export default function Yr() {
+export default function Weather() {
   const [clickedLocation, setClickedLocation] = useState<Location | null>(null);
   const [locationName, setLocationName] = useState<string | null>(null);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);

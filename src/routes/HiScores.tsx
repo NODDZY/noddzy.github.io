@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 
 import { SKILL_ICON_URL, WOM_URL, HISCORE_URL, fetchRunescapeUser } from "../services/osrs/api";
 
-import "../styles/osrs-hiscores.css";
+import "../styles/routes/osrs-hiscores.css";
 
 interface RunescapeSkill {
   metric: string;
@@ -12,7 +12,7 @@ interface RunescapeSkill {
   level: number;
 }
 
-export default function Hiscores() {
+export default function HiScores() {
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
   const [username, setUsername] = useState<string>("");
   const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("lastUsername") || null);
@@ -117,7 +117,7 @@ export default function Hiscores() {
 
       {skills.length > 0 && lastUsername && (
         <div>
-          <h2 id="hiscores-username">{lastUsername}</h2>
+          <h2 id="hiscores-text">{lastUsername}</h2>
 
           <table id="skill-table">
             <thead>
@@ -132,7 +132,7 @@ export default function Hiscores() {
             <tbody>{skillItem}</tbody>
           </table>
 
-          <p id="hiscores-links">
+          <p id="hiscores-text">
             <a
               href={HISCORE_URL(lastUsername)}
               target="_blank">
