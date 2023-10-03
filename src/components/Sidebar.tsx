@@ -13,10 +13,10 @@ export default function Sidebar({ sidebarExpanded, toggleSidebar }: SidebarProps
   const location = useLocation();
 
   const routes = [
-    { to: "hiscores", text: "OSRS HiScores" },
+    { to: "reddit-scroller", text: "Reddit Scroller" },
     { to: "forecast", text: "Weather Forecast" },
-    { to: "lol-champions", text: "Champion Browser" },
-    { to: "reddit-scroller", text: "Reddit Scroller" }
+    { to: "hiscores", text: "OSRS HiScores" },
+    { to: "lol-champions", text: "Champion Browser" }
   ];
 
   function handleSidebarClick() {
