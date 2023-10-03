@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 
-import { fetchSubFeed } from "../services/reddit/api";
-import { RedditResponse, RedditPost } from "../services/reddit/interface";
+import { POST_LINK, fetchSubFeed } from "../services/reddit/api";
+import { RedditPost } from "../services/reddit/interface";
+import "../styles/routes/reddit-scroller.css";
 
 export default function RedditScroller() {
   const [posts, setPosts] = useState<RedditPost[]>([]);
+  const [selectedSub, setselectedSub] = useState<string>("all");
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchRedditFrontPage = async () => {
     setIsLoading(true);
     try {
-      const response = await fetchSubFeed(after);
-      const newPosts: RedditPost[] = response.data.children.map((post: RedditResponse) => post.data);
+      const response = await fetchSubFeed(selectedSub, after);
+      const newPosts: RedditPost[] = response.data.children.map((child) => child.data);
       setPosts([...posts, ...newPosts]);
       setAfter(response.data.after);
     } catch (error) {
@@ -35,16 +37,22 @@ export default function RedditScroller() {
   };
 
   return (
-    <div className="main-element">
+    <div className="main-element reddit-scroller">
       <h1>Reddit Scroller</h1>
-      <p>TODO_TODO_TODO_TODO_TODO</p>
+      <p>TODO: {posts.length}</p>
 
       <div className="posts">
         {posts.map((post) => (
           <div
             key={post.id}
             className="post">
-            <h2>{post.title}</h2>
+            <h2 title={post.title}>
+              <a
+                href={POST_LINK(post.permalink)}
+                target="_blank">
+                {post.title}
+              </a>
+            </h2>
             <p>{post.author}</p>
             <p>{post.score} points</p>
           </div>
@@ -52,12 +60,12 @@ export default function RedditScroller() {
       </div>
 
       {isLoading && <p>Loading...</p>}
-      {after && !isLoading && <button onClick={handleLoadMore}>Load More</button>}
-      <button
-        className="to-top-button"
-        onClick={handleToTop}>
-        To Top
-      </button>
+      {after && !isLoading && (
+        <div className="button-row">
+          <button onClick={handleLoadMore}>Load More</button>
+          <button onClick={handleToTop}>To Top</button>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,15 @@
 export interface RedditResponse {
   kind: string;
+  data: {
+    after: string;
+    dist: number;
+    children: RedditResponseChild[];
+    before: string;
+  };
+}
+
+export interface RedditResponseChild {
+  kind: string;
   data: RedditPost;
 }
 
@@ -8,8 +18,10 @@ export interface RedditPost {
   subreddit: string;
   subreddit_name_prefixed: string;
   title: string;
+  selftext: string;
   author: string;
   score: number;
+  permalink: string;
   url: string;
   spoiler: boolean;
   post_hint: string;

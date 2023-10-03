@@ -1,0 +1,48 @@
+.posts {
+  list-style: none;
+  padding: 20px 0 20px 0;
+}
+
+.post {
+  border: 1px solid var(--bg-soft-mute);
+  margin-bottom: 8px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post h2 {
+  font-size: 20px;
+  padding: 1px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.post h2 a {
+  color: var(--text-1);
+}
+
+.post p {
+    color: var(--text-2);
+  font-size: 14px;
+  padding: 1px;
+  margin: 0;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+}
+
+.reddit-scroller button {
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.reddit-scroller button:hover {
+  background-color: var(--highlight-darker);
+}
