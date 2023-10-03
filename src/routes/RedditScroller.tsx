@@ -88,6 +88,7 @@ export default function RedditScroller() {
             key={post.id}
             post={post}
             expandedPostId={expandedPostId}
+            selectedSub={selectedSub}
             handleExpandPost={handleExpandPost}
           />
         ))}

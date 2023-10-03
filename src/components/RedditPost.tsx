@@ -9,12 +9,13 @@ import { RedditPost } from "../services/reddit/interface";
 interface RedditPostComponentProps {
   post: RedditPost;
   expandedPostId: string | null;
+  selectedSub: string;
   handleExpandPost: (postId: string) => void;
 }
 
 type Types = "Image" | "TextImage" | "Text" | "Video" | "Images" | "Unknown";
 
-export default function RedditPostComponent({ post, expandedPostId, handleExpandPost }: RedditPostComponentProps) {
+export default function RedditPostComponent({ post, expandedPostId, selectedSub, handleExpandPost }: RedditPostComponentProps) {
   const [type, setType] = useState<Types | null>(null);
 
   useEffect(() => {
@@ -37,12 +38,17 @@ export default function RedditPostComponent({ post, expandedPostId, handleExpand
           {type === "Text" && <FiFileText />}
           {(type === "Image" || type === "TextImage" || type === "Images") && <FiImage />}
           {type === "Video" && <FiFilm />} submitted{" "}
-          <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author} to{" "}
-          <a
-            href={SUB_LINK(post.subreddit_name_prefixed)}
-            className="subreddit">
-            {post.subreddit_name_prefixed}
-          </a>
+          <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author}
+          {selectedSub === "all" && (
+            <>
+              <span> to </span>
+              <a
+                href={SUB_LINK(post.subreddit_name_prefixed)}
+                className="subreddit">
+                {post.subreddit_name_prefixed}
+              </a>
+            </>
+          )}
         </p>
         <p className="points">
           {post.score} points | {post.num_comments} comments
