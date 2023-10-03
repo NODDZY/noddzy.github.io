@@ -14,6 +14,7 @@ export default function RedditScroller() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, toggleRefresh] = useState<boolean>(false);
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
+  const [expandedPostLog, setExpandedPostLog] = useState<string[]>([]);
 
   const presetSubs = ["all", "2007scape", "AnarchyChess", "LeagueOfMemes", "ProgrammerHumor", "Art", "pettyrevenge", "ghibli", "lotrmemes", "todayilearned"];
 
@@ -74,6 +75,9 @@ export default function RedditScroller() {
   };
 
   const handleExpandPost = (postId: string) => {
+    if (!expandedPostLog.includes(postId)) {
+      setExpandedPostLog([...expandedPostLog, postId]);
+    }
     setExpandedPostId(postId === expandedPostId ? null : postId);
   };
 
@@ -103,6 +107,7 @@ export default function RedditScroller() {
             key={post.id}
             post={post}
             expandedPostId={expandedPostId}
+            expandedPostLog={expandedPostLog}
             selectedSub={selectedSub}
             handleExpandPost={handleExpandPost}
           />

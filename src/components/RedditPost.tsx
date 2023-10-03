@@ -10,13 +10,14 @@ import { RedditPost } from "../services/reddit/interface";
 interface RedditPostComponentProps {
   post: RedditPost;
   expandedPostId: string | null;
+  expandedPostLog: string[];
   selectedSub: string;
   handleExpandPost: (postId: string) => void;
 }
 
 type Types = "Image" | "TextImage" | "Text" | "Video" | "Images" | "Unknown";
 
-export default function RedditPostComponent({ post, expandedPostId, selectedSub, handleExpandPost }: RedditPostComponentProps) {
+export default function RedditPostComponent({ post, expandedPostId, expandedPostLog, selectedSub, handleExpandPost }: RedditPostComponentProps) {
   const [type, setType] = useState<Types | null>(null);
 
   useEffect(() => {
@@ -28,10 +29,12 @@ export default function RedditPostComponent({ post, expandedPostId, selectedSub,
       key={post.id}
       className="post">
       <div>
-        <h2 title={post.title}>
+        <h2>
           <a
             href={POST_LINK(post.permalink)}
-            target="_blank">
+            target="_blank"
+            title={post.title}
+            className={expandedPostLog.includes(post.id) ? "title-logged" : ""}>
             {post.title}
           </a>
         </h2>

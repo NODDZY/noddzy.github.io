@@ -16,13 +16,16 @@
   font-size: 20px;
   padding: 1px;
   margin: 0;
-  cursor: pointer;
   max-width: 540px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .post h2 a {
   color: var(--text-1);
+  cursor: pointer;
+}
+.post h2 a.title-logged {
+  color: var(--text-2);
 }
 
 .post p {
