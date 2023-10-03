@@ -8,26 +8,32 @@
   margin-bottom: 8px;
   padding: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  min-width: 350px;
 }
 
 .post h2 {
   font-size: 20px;
   padding: 1px;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
+  max-width: 600px;
 }
 .post h2 a {
   color: var(--text-1);
 }
 
 .post p {
-    color: var(--text-2);
+  color: var(--text-2);
   font-size: 14px;
   padding: 1px;
   margin: 0;
+}
+.post-preview {
+  display: grid;
+  place-items: center;
+  width: 70px;
 }
 
 .button-row {

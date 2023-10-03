@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
 import { POST_LINK, fetchSubFeed } from "../services/reddit/api";
 import { RedditPost } from "../services/reddit/interface";
@@ -63,15 +64,24 @@ export default function RedditScroller() {
           <div
             key={post.id}
             className="post">
-            <h2 title={post.title}>
-              <a
-                href={POST_LINK(post.permalink)}
-                target="_blank">
-                {post.title}
-              </a>
-            </h2>
-            <p>submitted <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author} to {post.subreddit_name_prefixed}</p>
-            <p>{post.score} points</p>
+            <div>
+              <h2 title={post.title}>
+                <a
+                  href={POST_LINK(post.permalink)}
+                  target="_blank">
+                  {post.title}
+                </a>
+              </h2>
+              <p>
+                submitted <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by{" "}
+                {post.author} to {post.subreddit_name_prefixed}
+              </p>
+              <p className="points">{post.score} points</p>
+            </div>
+
+            <div className="post-preview">
+              <FiChevronDown />
+            </div>
           </div>
         ))}
       </div>
