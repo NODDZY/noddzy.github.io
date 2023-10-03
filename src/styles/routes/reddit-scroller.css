@@ -57,7 +57,16 @@
   min-width: 70px;
   cursor: pointer;
 }
-
+.settings-row {
+  display: flex;
+  justify-content: left;
+}
+.settings-row button {
+  background-color: var(--bg-soft);
+}
+.settings-row button:hover {
+  background-color: var(--bg-alt);
+}
 .button-row {
   display: flex;
   justify-content: center;

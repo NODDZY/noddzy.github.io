@@ -21,9 +21,18 @@ export function getTimeSinceUtcTimestamp(utcTimestamp: number) {
   } else if (millis < 24 * 60 * 60 * 1000) {
     result = millis / 1000 / 60 / 60;
     unit = "hours";
-  } else {
+  } else if (millis < 7 * 24 * 60 * 60 * 1000) {
     result = millis / 1000 / 60 / 60 / 24;
     unit = "days";
+  } else if (millis < 30 * 24 * 60 * 60 * 1000) {
+    result = millis / 1000 / 60 / 60 / 24 / 7;
+    unit = "weeks";
+  } else if (millis < 365 * 24 * 60 * 60 * 1000) {
+    result = millis / 1000 / 60 / 60 / 24 / 30;
+    unit = "months";
+  } else {
+    result = millis / 1000 / 60 / 60 / 24 / 365;
+    unit = "years";
   }
 
   return `${result.toFixed(0)} ${unit}`;

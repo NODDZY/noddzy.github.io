@@ -8,28 +8,18 @@ import RedditPostComponent from "../components/RedditPost";
 export default function RedditScroller() {
   const [posts, setPosts] = useState<RedditPost[]>([]);
   const [selectedSub, setselectedSub] = useState<string>("all");
+  const [topPosts, setTopPosts] = useState<boolean>(false);
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, toggleRefresh] = useState<boolean>(false);
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
 
-  const presetSubs = [
-    "all",
-    "2007scape",
-    "AnarchyChess",
-    "LeagueOfMemes",
-    "ProgrammerHumor",
-    "Art",
-    "pettyrevenge",
-    "ghibli",
-    "lotrmemes",
-    "todayilearned"
-  ];
+  const presetSubs = ["all", "2007scape", "AnarchyChess", "LeagueOfMemes", "ProgrammerHumor", "Art", "pettyrevenge", "ghibli", "lotrmemes", "todayilearned"];
 
   const fetchRedditFrontPage = async () => {
     setIsLoading(true);
     try {
-      const response = await fetchSubFeed(selectedSub, after);
+      const response = await fetchSubFeed(selectedSub, topPosts, after);
       const newPosts: RedditPost[] = response.data.children.map((child) => child.data);
       setPosts([...posts, ...newPosts]);
       setAfter(response.data.after);
@@ -52,7 +42,7 @@ export default function RedditScroller() {
     setAfter("");
     setPosts([]);
     toggleRefresh(!refresh);
-  }, [selectedSub]);
+  }, [selectedSub, topPosts]);
 
   const handleLoadMore = () => {
     fetchRedditFrontPage();
@@ -69,6 +59,9 @@ export default function RedditScroller() {
   return (
     <div className="main-element reddit-scroller">
       <h1>Reddit Scroller</h1>
+      <div className="settings-row">
+        <button onClick={() => setTopPosts(!topPosts)}>Filter: {topPosts ? "Top" : "New"}</button>
+      </div>
       <p>Scroll through selected subreddits. Only inline content currently supported (no embeds).</p>
 
       <div className="subreddit-buttons">
