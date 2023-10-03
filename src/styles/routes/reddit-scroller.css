@@ -74,6 +74,7 @@
 .subreddit-buttons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .subreddit-buttons button {
   margin-right: 10px;

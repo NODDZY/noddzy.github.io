@@ -17,11 +17,13 @@ export default function RedditScroller() {
     "all",
     "2007scape",
     "AnarchyChess",
-    "pettyrevenge",
-    "ProgrammerHumor",
     "LeagueOfMemes",
+    "ProgrammerHumor",
+    "Art",
+    "pettyrevenge",
     "ghibli",
-    "lotrmemes"
+    "lotrmemes",
+    "todayilearned"
   ];
 
   const fetchRedditFrontPage = async () => {

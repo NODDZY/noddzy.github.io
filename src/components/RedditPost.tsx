@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 import { marked } from "marked";
 import { FiChevronDown, FiChevronUp, FiFileText, FiFilm, FiImage } from "react-icons/fi";
@@ -71,12 +72,12 @@ export default function RedditPostComponent({ post, expandedPostId, selectedSub,
                       <img
                         src={post.url}
                         alt={post.title}></img>
-                      <p dangerouslySetInnerHTML={{ __html: marked(post.selftext) }}></p>
+                      <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(post.selftext)) }}></p>
                     </>
                   );
 
                 case "Text":
-                  return <p dangerouslySetInnerHTML={{ __html: marked(post.selftext) }}></p>;
+                  return <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(post.selftext)) }}></p>;
 
                 case "Video":
                   return (
