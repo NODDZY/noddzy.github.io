@@ -9,6 +9,7 @@ export default function RedditScroller() {
   const [selectedSub, setselectedSub] = useState<string>("all");
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [refresh, toggleRefresh] = useState<boolean>(false);
 
   const fetchRedditFrontPage = async () => {
     setIsLoading(true);
@@ -28,6 +29,16 @@ export default function RedditScroller() {
     fetchRedditFrontPage();
   }, []);
 
+  useEffect(() => {
+    fetchRedditFrontPage();
+  }, [refresh]);
+
+  useEffect(() => {
+    setAfter("");
+    setPosts([]);
+    toggleRefresh(!refresh);
+  }, [selectedSub]);
+
   const handleLoadMore = () => {
     fetchRedditFrontPage();
   };
@@ -40,6 +51,11 @@ export default function RedditScroller() {
     <div className="main-element reddit-scroller">
       <h1>Reddit Scroller</h1>
       <p>TODO: {posts.length}</p>
+
+      <div className="subreddit-buttons">
+        <button onClick={() => setselectedSub("all")}>All</button>
+        <button onClick={() => setselectedSub("2007scape")}>2007scape</button>
+      </div>
 
       <div className="posts">
         {posts.map((post) => (
