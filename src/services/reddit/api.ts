@@ -4,6 +4,7 @@ import { RedditResponse } from "./interface";
 const LIMIT = 5;
 const REDDIT_BASE_URL = "https://www.reddit.com"
 
+export const SUB_LINK = (name: string) => `${REDDIT_BASE_URL}/${name}`;
 export const POST_LINK = (permalink: string) => `${REDDIT_BASE_URL}${permalink}`;
 
 export async function fetchSubFeed(sub: string, after?: string): Promise<RedditResponse> {

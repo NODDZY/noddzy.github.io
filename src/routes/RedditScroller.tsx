@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
-import { POST_LINK, fetchSubFeed } from "../services/reddit/api";
+import { POST_LINK, SUB_LINK, fetchSubFeed } from "../services/reddit/api";
 import { RedditPost } from "../services/reddit/interface";
 import { getTimeSinceUtcTimestamp, utcTimestampToUtcDate } from "../services/reddit/utils";
 import "../styles/routes/reddit-scroller.css";
@@ -12,6 +12,8 @@ export default function RedditScroller() {
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, toggleRefresh] = useState<boolean>(false);
+
+  const presetSubs = ["all", "2007scape", "AnarchyChess", "greentext", "lotrmemes", "ProgrammerHumor", "LeagueOfMemes", "ghibli", "ImaginarySliceOfLife"];
 
   const fetchRedditFrontPage = async () => {
     setIsLoading(true);
@@ -55,16 +57,14 @@ export default function RedditScroller() {
       <p>TODO: {posts.length}</p>
 
       <div className="subreddit-buttons">
-        <button
-          onClick={() => setselectedSub("all")}
-          className={selectedSub === "all" ? "selected" : ""}>
-          All
-        </button>
-        <button
-          onClick={() => setselectedSub("2007scape")}
-          className={selectedSub === "2007scape" ? "selected" : ""}>
-          2007scape
-        </button>
+        {presetSubs.map((subreddit) => (
+          <button
+            key={subreddit}
+            onClick={() => setselectedSub(subreddit)}
+            className={selectedSub === subreddit ? "selected" : ""}>
+            {subreddit}
+          </button>
+        ))}
       </div>
 
       <div className="posts">
@@ -82,9 +82,16 @@ export default function RedditScroller() {
               </h2>
               <p>
                 submitted <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by{" "}
-                {post.author} to {post.subreddit_name_prefixed}
+                {post.author} to{" "}
+                <a
+                  href={SUB_LINK(post.subreddit_name_prefixed)}
+                  className="subreddit">
+                  {post.subreddit_name_prefixed}
+                </a>
               </p>
-              <p className="points">{post.score} points</p>
+              <p className="points">
+                {post.score} points | {post.num_comments} comments
+              </p>
             </div>
 
             <div className="post-preview">

@@ -30,10 +30,14 @@
   padding: 1px;
   margin: 0;
 }
+.post p.points {
+  font-size: 12px;
+}
 .post-preview {
   display: grid;
   place-items: center;
   width: 70px;
+  cursor: pointer;
 }
 
 .button-row {
@@ -49,11 +53,19 @@
   border-radius: 4px;
 }
 
-.reddit-scroller button:hover {
-  background-color: var(--highlight-darker);
+.subreddit-buttons {
+  display: flex;
+  flex-wrap: wrap;
 }
-
+.subreddit-buttons button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 .subreddit-buttons button.selected {
+  background-color: var(--highlight);
+  color: white;
+}
+.reddit-scroller button:hover {
   background-color: var(--highlight-darker);
   color: white;
 }

@@ -22,6 +22,7 @@ export interface RedditPost {
   selftext: string;
   author: string;
   score: number;
+  num_comments: number;
   permalink: string;
   url: string;
   spoiler: boolean;
