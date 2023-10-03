@@ -64,9 +64,6 @@
 .settings-row button {
   background-color: var(--bg-soft);
 }
-.settings-row button:hover {
-  background-color: var(--bg-alt);
-}
 .button-row {
   display: flex;
   justify-content: center;
@@ -83,7 +80,8 @@
 .subreddit-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
+  min-width: 400px;
 }
 .subreddit-buttons button {
   margin-right: 10px;

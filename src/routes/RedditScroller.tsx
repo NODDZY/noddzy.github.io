@@ -9,6 +9,7 @@ export default function RedditScroller() {
   const [posts, setPosts] = useState<RedditPost[]>([]);
   const [selectedSub, setselectedSub] = useState<string>("all");
   const [topPosts, setTopPosts] = useState<boolean>(false);
+  const [infiniteScroll, setInfiniteScroll] = useState<boolean>(false);
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, toggleRefresh] = useState<boolean>(false);
@@ -48,6 +49,26 @@ export default function RedditScroller() {
     fetchRedditFrontPage();
   };
 
+  const isAtBottomOfPage = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    return scrollTop + windowHeight >= documentHeight;
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (infiniteScroll && isAtBottomOfPage() && !isLoading) {
+        handleLoadMore();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [infiniteScroll, after]);
+
   const handleToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -60,7 +81,8 @@ export default function RedditScroller() {
     <div className="main-element reddit-scroller">
       <h1>Reddit Scroller</h1>
       <div className="settings-row">
-        <button onClick={() => setTopPosts(!topPosts)}>Filter: {topPosts ? "Top" : "New"}</button>
+        <button onClick={() => setTopPosts(!topPosts)}>Filter: {topPosts ? "Top posts" : "New posts"}</button>
+        <button onClick={() => setInfiniteScroll(!infiniteScroll)}>Infinite scrolling: {infiniteScroll ? "On" : "Off"}</button>
       </div>
       <p>Scroll through selected subreddits. Only inline content currently supported (no embeds).</p>
 
@@ -88,7 +110,7 @@ export default function RedditScroller() {
       </div>
 
       {isLoading && <p>Loading...</p>}
-      {after && !isLoading && (
+      {after && !isLoading && !infiniteScroll && (
         <div className="button-row">
           <button onClick={handleLoadMore}>Load More</button>
           <button onClick={handleToTop}>To Top</button>
