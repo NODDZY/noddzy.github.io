@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { marked } from "marked";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { POST_LINK, SUB_LINK, fetchSubFeed } from "../services/reddit/api";
 import { RedditPost } from "../services/reddit/interface";
@@ -109,7 +109,7 @@ export default function RedditScroller() {
             <div
               className="post-preview"
               onClick={() => handleExpandPost(post.id)}>
-              <FiChevronDown />
+              {post.id === expandedPostId && <FiChevronUp /> || <FiChevronDown />}
             </div>
           </div>
         ))}
