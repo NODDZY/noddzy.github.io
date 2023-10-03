@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { marked } from "marked";
 import { FiChevronDown } from "react-icons/fi";
 
 import { POST_LINK, SUB_LINK, fetchSubFeed } from "../services/reddit/api";
@@ -12,6 +13,7 @@ export default function RedditScroller() {
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, toggleRefresh] = useState<boolean>(false);
+  const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
 
   const presetSubs = ["all", "2007scape", "AnarchyChess", "greentext", "lotrmemes", "ProgrammerHumor", "LeagueOfMemes", "ghibli", "ImaginarySliceOfLife"];
 
@@ -49,6 +51,10 @@ export default function RedditScroller() {
 
   const handleToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleExpandPost = (postId: string) => {
+    setExpandedPostId(postId === expandedPostId ? null : postId);
   };
 
   return (
@@ -92,9 +98,17 @@ export default function RedditScroller() {
               <p className="points">
                 {post.score} points | {post.num_comments} comments
               </p>
+
+              {expandedPostId === post.id && (
+                <div className="expanded-content">
+                  <p dangerouslySetInnerHTML={{ __html: marked(post.selftext) }}></p>
+                </div>
+              )}
             </div>
 
-            <div className="post-preview">
+            <div
+              className="post-preview"
+              onClick={() => handleExpandPost(post.id)}>
               <FiChevronDown />
             </div>
           </div>
