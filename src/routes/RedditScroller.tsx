@@ -55,8 +55,16 @@ export default function RedditScroller() {
       <p>TODO: {posts.length}</p>
 
       <div className="subreddit-buttons">
-        <button onClick={() => setselectedSub("all")}>All</button>
-        <button onClick={() => setselectedSub("2007scape")}>2007scape</button>
+        <button
+          onClick={() => setselectedSub("all")}
+          className={selectedSub === "all" ? "selected" : ""}>
+          All
+        </button>
+        <button
+          onClick={() => setselectedSub("2007scape")}
+          className={selectedSub === "2007scape" ? "selected" : ""}>
+          2007scape
+        </button>
       </div>
 
       <div className="posts">
