@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { POST_LINK, fetchSubFeed } from "../services/reddit/api";
 import { RedditPost } from "../services/reddit/interface";
+import { getTimeSinceUtcTimestamp, utcTimestampToUtcDate } from "../services/reddit/utils";
 import "../styles/routes/reddit-scroller.css";
 
 export default function RedditScroller() {
@@ -69,7 +70,7 @@ export default function RedditScroller() {
                 {post.title}
               </a>
             </h2>
-            <p>{post.author}</p>
+            <p>submitted <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author} to {post.subreddit_name_prefixed}</p>
             <p>{post.score} points</p>
           </div>
         ))}

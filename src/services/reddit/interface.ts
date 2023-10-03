@@ -17,6 +17,7 @@ export interface RedditPost {
   id: string;
   subreddit: string;
   subreddit_name_prefixed: string;
+  created_utc: number;
   title: string;
   selftext: string;
   author: string;
