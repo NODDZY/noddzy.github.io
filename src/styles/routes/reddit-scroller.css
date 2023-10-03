@@ -35,16 +35,20 @@
 .expanded-content {
   margin-top: 5px;
   margin-left: 2px;
-  padding-left: 5px;
+  padding: 0px;
   border: 1px solid var(--bg-soft-mute);
   background-color: var(--bg-soft);
   border-radius: 4px;
+  max-height: 860px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .expanded-content p h1 {
   margin-top: 0;
 }
-.expanded-content img {
-  max-width: 200px;
+.expanded-content img,
+.expanded-content video {
+  max-width: 100%;
 }
 .post-preview {
   display: grid;

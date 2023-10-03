@@ -27,4 +27,26 @@ export interface RedditPost {
   url: string;
   spoiler: boolean;
   post_hint: string;
+  is_self: boolean;
+  is_video: boolean;
+  media_embed: Object;
+  media: {
+    reddit_video: {
+      fallback_url: string;
+      is_gif: boolean;
+    };
+  };
+  media_metadata: {
+    [mediaId: string]: {
+      status: string;
+      e: string;
+      m: string;
+    };
+  };
+  gallery_data: {
+    items: {
+      media_id: string;
+      id: number;
+    }[];
+  };
 }

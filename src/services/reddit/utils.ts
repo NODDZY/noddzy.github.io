@@ -1,3 +1,5 @@
+import { RedditPost } from "./interface";
+
 export function getTimeSinceUtcTimestamp(utcTimestamp: number) {
   const utcMilliseconds = utcTimestamp * 1000;
   const currentTime = Date.now();
@@ -29,4 +31,20 @@ export function getTimeSinceUtcTimestamp(utcTimestamp: number) {
 
 export function utcTimestampToUtcDate(utcTimestamp: number) {
   return new Date(utcTimestamp * 1000);
+}
+
+export function classifyRedditPost(post: RedditPost) {
+  if (post.post_hint === "image" && !post.selftext) {
+    return "Image";
+  } else if (post.post_hint === "image" && post.selftext) {
+    return "TextImage";
+  } else if (post.post_hint === "video" || post.post_hint === "rich:video" || post.is_video) {
+    return "Video";
+  } else if (post.gallery_data && post.gallery_data.items.length > 1) {
+    return "Images";
+  } else if (post.is_self && post.selftext) {
+    return "Text";
+  } else {
+    return null;
+  }
 }
