@@ -10,6 +10,7 @@ import Index from "./routes/Index";
 import Hiscores from "./routes/HiScores";
 import Weather from "./routes/Weather";
 import ChampionBrowser from "./routes/ChampionBrowser";
+import RedditScroller from "./routes/RedditScroller";
 
 const router = createHashRouter([
   {
@@ -20,7 +21,8 @@ const router = createHashRouter([
       { index: true, element: <Index /> },
       { path: "hiscores", element: <Hiscores /> },
       { path: "forecast", element: <Weather /> },
-      { path: "lol-champions", element: <ChampionBrowser /> }
+      { path: "lol-champions", element: <ChampionBrowser /> },
+      { path: "reddit-scroller", element: <RedditScroller /> }
     ]
   }
 ]);

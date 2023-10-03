@@ -1,0 +1,90 @@
+.posts {
+  list-style: none;
+  padding: 20px 0 20px 0;
+}
+
+.post {
+  margin-bottom: 8px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  min-width: 350px;
+}
+
+.post h2 {
+  font-size: 20px;
+  padding: 1px;
+  margin: 0;
+  cursor: pointer;
+  max-width: 540px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.post h2 a {
+  color: var(--text-1);
+}
+
+.post p {
+  color: var(--text-2);
+  font-size: 14px;
+  padding: 1px;
+  margin: 0;
+}
+.post p.points {
+  font-size: 12px;
+}
+.expanded-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  border: 1px solid var(--bg-soft-mute);
+  background-color: var(--bg-soft);
+  max-height: 1000px;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.expanded-content img,
+.expanded-content video {
+  max-width: 100%;
+}
+.post-preview {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  min-width: 70px;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+}
+
+.reddit-scroller button {
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.subreddit-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.subreddit-buttons button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.subreddit-buttons button.selected {
+  background-color: var(--highlight);
+  color: white;
+}
+.reddit-scroller button:hover {
+  background-color: var(--highlight-darker);
+  color: white;
+}
