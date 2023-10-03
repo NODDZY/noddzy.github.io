@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiLoader } from "react-icons/fi";
 
 import { SKILL_ICON_URL, WOM_URL, HISCORE_URL, fetchRunescapeUser } from "../services/osrs/api";
 
@@ -15,6 +15,7 @@ interface RunescapeSkill {
 export default function HiScores() {
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
   const [username, setUsername] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("lastUsername") || null);
 
   // Effect to run once when component mounts
@@ -29,8 +30,10 @@ export default function HiScores() {
   }, []);
 
   const search = async () => {
+    setIsLoading(true);
     if (username.toLowerCase() === lastUsername?.toLowerCase()) {
       // Dont search again if the username is the same as the last search
+      setIsLoading(false);
       return;
     }
 
@@ -40,6 +43,7 @@ export default function HiScores() {
       setLastUsername(null);
       localStorage.removeItem("lastUsername");
       localStorage.removeItem("skills");
+      setIsLoading(false);
       return;
     }
 
@@ -74,6 +78,7 @@ export default function HiScores() {
       localStorage.removeItem("lastUsername");
       localStorage.removeItem("skills");
     }
+    setIsLoading(false);
   };
 
   const skillItem = skills.map((skill) => (
@@ -111,7 +116,7 @@ export default function HiScores() {
         <button
           id="search-button"
           onClick={search}>
-          <FiSearch />
+          {isLoading ? <FiLoader /> : <FiSearch />}
         </button>
       </div>
 
