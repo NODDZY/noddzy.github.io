@@ -28,35 +28,47 @@ export default function RedditPostComponent({ post, expandedPostId, expandedPost
     <div
       key={post.id}
       className="post">
-      <div>
-        <h2>
-          <a
-            href={POST_LINK(post.permalink)}
-            target="_blank"
-            title={post.title}
-            className={expandedPostLog.includes(post.id) ? "title-logged" : ""}>
-            {post.title}
-          </a>
-        </h2>
-        <p>
-          {type === "Text" && <FiFileText />}
-          {(type === "Image" || type === "TextImage" || type === "Images") && <FiImage />}
-          {type === "Video" && <FiFilm />} submitted{" "}
-          <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author}
-          {selectedSub === "all" && (
-            <>
-              <span> to </span>
+      <div className="outer-post">
+        <div className="inner-post">
+          <div>
+            <h2>
               <a
-                href={SUB_LINK(post.subreddit_name_prefixed)}
-                className="subreddit">
-                {post.subreddit_name_prefixed}
+                href={POST_LINK(post.permalink)}
+                target="_blank"
+                title={post.title}
+                className={expandedPostLog.includes(post.id) ? "title-logged" : ""}>
+                {post.title}
               </a>
-            </>
+            </h2>
+            <p>
+              {type === "Text" && <FiFileText />}
+              {(type === "Image" || type === "TextImage" || type === "Images") && <FiImage />}
+              {type === "Video" && <FiFilm />} submitted{" "}
+              <span title={utcTimestampToUtcDate(post.created_utc).toUTCString()}>{getTimeSinceUtcTimestamp(post.created_utc)} ago</span> by {post.author}
+              {selectedSub === "all" && (
+                <>
+                  <span> to </span>
+                  <a
+                    href={SUB_LINK(post.subreddit_name_prefixed)}
+                    className="subreddit">
+                    {post.subreddit_name_prefixed}
+                  </a>
+                </>
+              )}
+            </p>
+            <p className="points">
+              {post.score} points | {post.num_comments} comments
+            </p>
+          </div>
+
+          {type && (
+            <div
+              className="post-preview"
+              onClick={() => handleExpandPost(post.id)}>
+              {post.id === expandedPostId ? <FiChevronUp /> : <FiChevronDown />}
+            </div>
           )}
-        </p>
-        <p className="points">
-          {post.score} points | {post.num_comments} comments
-        </p>
+        </div>
 
         {expandedPostId === post.id && type && (
           <div className="expanded-content">
@@ -108,14 +120,6 @@ export default function RedditPostComponent({ post, expandedPostId, expandedPost
           </div>
         )}
       </div>
-
-      {type && (
-        <div
-          className="post-preview"
-          onClick={() => handleExpandPost(post.id)}>
-          {post.id === expandedPostId ? <FiChevronUp /> : <FiChevronDown />}
-        </div>
-      )}
     </div>
   );
 }
