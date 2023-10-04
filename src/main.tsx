@@ -11,6 +11,7 @@ import Hiscores from "./routes/HiScores";
 import Weather from "./routes/Weather";
 import ChampionBrowser from "./routes/ChampionBrowser";
 import RedditScroller from "./routes/RedditScroller";
+import PokeAPI from "./routes/PokeAPI";
 
 const router = createHashRouter([
   {
@@ -22,7 +23,8 @@ const router = createHashRouter([
       { path: "hiscores", element: <Hiscores /> },
       { path: "forecast", element: <Weather /> },
       { path: "lol-champions", element: <ChampionBrowser /> },
-      { path: "reddit-scroller", element: <RedditScroller /> }
+      { path: "reddit-scroller", element: <RedditScroller /> },
+      { path: "pokeapi", element: <PokeAPI /> }
     ]
   }
 ]);
