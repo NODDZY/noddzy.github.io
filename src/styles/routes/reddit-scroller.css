@@ -11,6 +11,14 @@
   justify-content: space-between;
   min-width: 350px;
 }
+.outer-post {
+  width: 100%;
+}
+.inner-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .post h2 {
   font-size: 20px;
@@ -44,7 +52,7 @@
   margin-top: 5px;
   border: 1px solid var(--bg-soft-mute);
   background-color: var(--bg-soft);
-  max-height: 1000px;
+  max-height: 60vh;
   overflow-x: auto;
   flex-wrap: wrap;
   gap: 3px;

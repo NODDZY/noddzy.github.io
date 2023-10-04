@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Transition from "../components/Transition";
 
 export interface SidebarProps {
   sidebarExpanded: boolean;
@@ -57,7 +58,9 @@ export default function Root() {
       />
 
       <div id="main">
-        <Outlet />
+        <Suspense fallback={<Transition />}>
+          <Outlet />
+        </Suspense>
       </div>
     </>
   );
