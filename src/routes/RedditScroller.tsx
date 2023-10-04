@@ -8,11 +8,11 @@ import RedditPostComponent from "../components/RedditPost";
 export default function RedditScroller() {
   const [posts, setPosts] = useState<RedditPost[]>([]);
   const [selectedSub, setselectedSub] = useState<string>("all");
-  const [topPosts, setTopPosts] = useState<boolean>(false);
-  const [infiniteScroll, setInfiniteScroll] = useState<boolean>(false);
+  const [topPosts, setTopPosts] = useState<boolean>(localStorage.getItem("reddit-setting-filter-top") === "true" || false);
+  const [infiniteScroll, setInfiniteScroll] = useState<boolean>(localStorage.getItem("reddit-setting-infinitescroll") === "true" || false);
   const [after, setAfter] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [refresh, toggleRefresh] = useState<boolean>(false);
+  const [refresh, toggleRefresh] = useState<boolean>(true);
   const [expandedPostId, setExpandedPostId] = useState<string | null>(null);
   const [expandedPostLog, setExpandedPostLog] = useState<string[]>([]);
 
@@ -34,11 +34,12 @@ export default function RedditScroller() {
 
   useEffect(() => {
     fetchRedditFrontPage();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
-    fetchRedditFrontPage();
-  }, [refresh]);
+    localStorage.setItem("reddit-setting-filter-top", topPosts.toString());
+    localStorage.setItem("reddit-setting-infinitescroll", infiniteScroll.toString());
+  }, [infiniteScroll, topPosts]);
 
   useEffect(() => {
     setAfter("");

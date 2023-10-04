@@ -9,7 +9,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  min-width: 350px;
 }
 .outer-post {
   width: 100%;
@@ -92,7 +91,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  min-width: 400px;
 }
 .subreddit-buttons button {
   margin-right: 10px;

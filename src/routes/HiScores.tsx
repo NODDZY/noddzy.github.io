@@ -16,16 +16,16 @@ export default function HiScores() {
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
   const [username, setUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("lastUsername") || null);
+  const [lastUsername, setLastUsername] = useState<string | null>(localStorage.getItem("osrs-username") || null);
 
   // Effect to run once when component mounts
   useEffect(() => {
     // Load lastUsername and skills from localStorage when the component mounts.
-    const storedUsername = localStorage.getItem("lastUsername");
+    const storedUsername = localStorage.getItem("osrs-username");
     if (storedUsername) {
       setLastUsername(storedUsername);
     }
-    const storedSkills = JSON.parse(localStorage.getItem("skills") || "[]");
+    const storedSkills = JSON.parse(localStorage.getItem("osrs-skills") || "[]");
     setSkills(storedSkills);
   }, []);
 
@@ -41,8 +41,8 @@ export default function HiScores() {
       // If the username is empty, clear the data and localStorage
       setSkills([]);
       setLastUsername(null);
-      localStorage.removeItem("lastUsername");
-      localStorage.removeItem("skills");
+      localStorage.removeItem("osrs-username");
+      localStorage.removeItem("osrs-skills");
       setIsLoading(false);
       return;
     }
@@ -69,14 +69,14 @@ export default function HiScores() {
     if (fetchedSkills !== null && fetchedLastUsername) {
       setSkills(fetchedSkills);
       setLastUsername(fetchedLastUsername);
-      localStorage.setItem("lastUsername", fetchedLastUsername);
-      localStorage.setItem("skills", JSON.stringify(fetchedSkills));
+      localStorage.setItem("osrs-username", fetchedLastUsername);
+      localStorage.setItem("osrs-skills", JSON.stringify(fetchedSkills));
     } else {
       // If the fetched stats are null, clear data
       setSkills([]);
       setLastUsername(null);
-      localStorage.removeItem("lastUsername");
-      localStorage.removeItem("skills");
+      localStorage.removeItem("osrs-username");
+      localStorage.removeItem("osrs-skills");
     }
     setIsLoading(false);
   };
