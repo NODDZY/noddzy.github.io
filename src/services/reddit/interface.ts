@@ -29,7 +29,7 @@ export interface RedditPost {
   post_hint: string;
   is_self: boolean;
   is_video: boolean;
-  media_embed: Object;
+  media_embed: object;
   media: {
     reddit_video: {
       fallback_url: string;

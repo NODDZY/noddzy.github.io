@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import Header from "../components/Header";
@@ -57,7 +57,9 @@ export default function Root() {
       />
 
       <div id="main">
-        <Outlet />
+        <Suspense>
+          <Outlet />
+        </Suspense>
       </div>
     </>
   );

@@ -8,7 +8,7 @@ import { FiLoader } from "react-icons/fi";
 export default function Pokedex() {
   const [query, setQuery] = useState<string>("pokemon/bulbasaur");
   const [prevQuery, setPrevQuery] = useState<string>(query);
-  const [response, setResponse] = useState<Object | null>(null);
+  const [response, setResponse] = useState<object | null>(null);
   const [search, toggleSearch] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
@@ -42,10 +42,10 @@ export default function Pokedex() {
   const jsonLines = (jsonString.match(/\r?\n/g) || "").length + 1;
 
   return (
-    <div className="main-element pokedex-container">
+    <div className="main-element">
       <h1>PokéAPI Lookup</h1>
       <p>Run queries to the RESTful PokeAPI. The API is linked to an extensive database detailing everything about the Pokémon main game series.</p>
-      <div className="search-bar">
+      <form className="search-bar">
         <label>{BASE_URL}</label>
         <input
           type="text"
@@ -58,7 +58,7 @@ export default function Pokedex() {
           value={query}
         />
         <button onClick={() => toggleSearch(!search)}>{isLoading ? <FiLoader className="spin" /> : "Submit"}</button>
-      </div>
+      </form>
       <p>
         Need a hint? Try <a onClick={() => handleHints("pokemon/bulbasaur")}>pokemon/bulbasaur</a>,{" "}
         <a onClick={() => handleHints("pokemon?limit=151")}>pokemon?limit=151</a> or <a onClick={() => handleHints("region/1")}>region/1</a>.
