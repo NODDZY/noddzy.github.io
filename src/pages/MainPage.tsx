@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import Transition from "../components/Transition";
 
 export interface SidebarProps {
   sidebarExpanded: boolean;
@@ -57,7 +58,7 @@ export default function Root() {
       />
 
       <div id="main">
-        <Suspense>
+        <Suspense fallback={<Transition />}>
           <Outlet />
         </Suspense>
       </div>
