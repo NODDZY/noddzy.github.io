@@ -76,7 +76,9 @@
 }
 
 .response-area h3 {
+  padding-top: 10px;
   margin: 0;
+  border-top: 1px solid var(--divider);
 }
 .json-viewer {
   background-color: var(--bg-alt);

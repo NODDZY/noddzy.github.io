@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { JSONTree } from "react-json-tree";
 
 import { runQuery, BASE_URL } from "../services/pokeapi/api";
-import "../styles/routes/pokedex.css";
+import "../styles/routes/pokeapi.css";
 import { FiLoader } from "react-icons/fi";
 
 export default function Pokedex() {
@@ -45,7 +45,7 @@ export default function Pokedex() {
     <div className="main-element">
       <h1>PokéAPI Lookup</h1>
       <p>Run queries to the RESTful PokeAPI. The API is linked to an extensive database detailing everything about the Pokémon main game series.</p>
-      <form className="search-bar">
+      <div className="search-bar">
         <label>{BASE_URL}</label>
         <input
           type="text"
@@ -58,7 +58,7 @@ export default function Pokedex() {
           value={query}
         />
         <button onClick={() => toggleSearch(!search)}>{isLoading ? <FiLoader className="spin" /> : "Submit"}</button>
-      </form>
+      </div>
       <p>
         Need a hint? Try <a onClick={() => handleHints("pokemon/bulbasaur")}>pokemon/bulbasaur</a>,{" "}
         <a onClick={() => handleHints("pokemon?limit=151")}>pokemon?limit=151</a> or <a onClick={() => handleHints("region/1")}>region/1</a>.
