@@ -1,8 +1,8 @@
 /* Base */
-#hiscores-text {
+.hiscores-text {
   text-align: center;
 }
-#hiscores-text a {
+.hiscores-text a {
   margin: 0 10px;
 }
 
