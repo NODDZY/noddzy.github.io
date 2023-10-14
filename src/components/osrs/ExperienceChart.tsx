@@ -1,5 +1,6 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { formatLabels, formatNumber } from "../../services/osrs/utils";
 
 interface ExperienceChartProps {
   timestamps: string[];
@@ -36,6 +37,9 @@ export default function ExperienceChart({ timestamps, data, color, title, label 
         title: {
           display: true,
           text: title
+        },
+        ticks: {
+          callback: (value: string | number) => formatNumber(value, true)
         }
       }
     }
@@ -47,17 +51,4 @@ export default function ExperienceChart({ timestamps, data, color, title, label 
       options={options}
     />
   );
-}
-
-// Rest of the code remains the same
-function formatLabels(timestamps: string[]) {
-  const formattedDates = timestamps.map((dateStr) => {
-    const date = new Date(dateStr);
-    const day = date.getDate();
-    const month = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
-
-    return `${month} ${day}`;
-  });
-
-  return formattedDates;
 }
