@@ -25,8 +25,8 @@ export default function HiScores() {
     const storedUsername = localStorage.getItem("osrs-username");
     if (storedUsername) {
       setLastUsername(storedUsername);
-      setUsername(storedUsername)
-      toggleSearch(!search)
+      setUsername(storedUsername);
+      toggleSearch(!search);
     }
   }, []);
 
@@ -73,7 +73,7 @@ export default function HiScores() {
         localStorage.setItem("osrs-username", fetchedLastUsername);
 
         const snapshots = await fetchUserSnapshots(fetchedLastUsername, Period.month);
-        setsnapshotDates(formatDate(snapshots.map((snapshot) => snapshot.createdAt)).reverse());
+        setsnapshotDates(snapshots.map((snapshot) => snapshot.createdAt).reverse());
         setsnapshotExperience(snapshots.map((snapshot) => snapshot.data.skills.overall.experience).reverse());
       } else {
         // If the fetched stats are null, clear data
@@ -130,25 +130,14 @@ export default function HiScores() {
             </a>
           </p>
           <br />
-          <h2 className="hiscores-text">Charts</h2>
-          <ExperienceChart
-            timestamps={snapshotDates}
-            data={snapshotExperience}
-          />
+          {snapshotExperience.length === 0 || (
+            <ExperienceChart
+              timestamps={snapshotDates}
+              data={snapshotExperience}
+            />
+          )}
         </div>
       )}
     </div>
   );
-}
-
-function formatDate(timestamps: string[]) {
-  const formattedDates = timestamps.map((dateStr) => {
-    const date = new Date(dateStr);
-    const day = date.getDate();
-    const month = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
-
-    return `${month} ${day}`;
-  });
-
-  return formattedDates;
 }

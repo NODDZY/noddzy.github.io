@@ -10,7 +10,7 @@ export default function ExperienceChart({ timestamps, data }: ExperienceChartPro
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
   const graphData = {
-    labels: timestamps,
+    labels: formatLabels(timestamps),
     datasets: [
       {
         label: "EXP",
@@ -22,9 +22,18 @@ export default function ExperienceChart({ timestamps, data }: ExperienceChartPro
   };
 
   const options = {
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
     scales: {
       y: {
-        beginAtZero: false
+        beginAtZero: false,
+        title: {
+          display: true,
+          text: "Experience"
+        }
       }
     }
   };
@@ -35,4 +44,16 @@ export default function ExperienceChart({ timestamps, data }: ExperienceChartPro
       options={options}
     />
   );
+}
+
+function formatLabels(timestamps: string[]) {
+  const formattedDates = timestamps.map((dateStr) => {
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
+
+    return `${month} ${day}`;
+  });
+
+  return formattedDates;
 }
