@@ -11,6 +11,7 @@ import "../styles/routes/osrs-hiscores.css";
 export default function HiScores() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [search, toggleSearch] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [skills, setSkills] = useState<RunescapeSkill[]>([]);
   const [username, setUsername] = useState<string>("");
@@ -18,6 +19,7 @@ export default function HiScores() {
 
   const [snapshotDates, setsnapshotDates] = useState<string[]>([]);
   const [snapshotExperience, setsnapshotExperience] = useState<number[]>([]);
+  const [snapshotRanks, setsnapshotRanks] = useState<number[]>([]);
 
   // Effect to run once when component mounts
   useEffect(() => {
@@ -56,14 +58,17 @@ export default function HiScores() {
       if (!response) {
         // Response is "404 Not Found"
         console.warn(`Could not find [${username}]`);
+        setError(`Could not find "${username}"`);
         fetchedSkills = [];
       } else if (response.latestSnapshot !== null && typeof response.latestSnapshot === "object") {
         // User found
+        setError(null);
         fetchedSkills = Object.values(response.latestSnapshot.data.skills);
         fetchedLastUsername = response.displayName;
       } else {
         // User found but has no stats
         console.warn(`[${username}] is registered on WOM but is not on the HiScores`);
+        setError(`User "${username}" is registered on Wise Old Man but does not appear on the official HiScores`);
         fetchedSkills = [];
       }
 
@@ -75,6 +80,7 @@ export default function HiScores() {
         const snapshots = await fetchUserSnapshots(fetchedLastUsername, Period.month);
         setsnapshotDates(snapshots.map((snapshot) => snapshot.createdAt).reverse());
         setsnapshotExperience(snapshots.map((snapshot) => snapshot.data.skills.overall.experience).reverse());
+        setsnapshotRanks(snapshots.map((snapshot) => snapshot.data.skills.overall.rank).reverse());
       } else {
         // If the fetched stats are null, clear data
         setSkills([]);
@@ -111,7 +117,7 @@ export default function HiScores() {
         </button>
       </div>
 
-      {skills.length > 0 && lastUsername && (
+      {skills.length > 0 && lastUsername ? (
         <div>
           <h2 className="hiscores-text">{lastUsername}</h2>
           <ExperienceTable skills={skills} />
@@ -134,9 +140,24 @@ export default function HiScores() {
             <ExperienceChart
               timestamps={snapshotDates}
               data={snapshotExperience}
+              color="RGB(100, 108, 255)"
+              title="Experience"
+              label="EXP"
+            />
+          )}
+          <br />
+          {snapshotRanks.length === 0 || (
+            <ExperienceChart
+              timestamps={snapshotDates}
+              data={snapshotRanks}
+              color="RGB(204, 122, 0)"
+              title="Rank overall"
+              label="Rank"
             />
           )}
         </div>
+      ) : (
+        <p>{error}</p>
       )}
     </div>
   );

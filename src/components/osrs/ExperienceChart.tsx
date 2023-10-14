@@ -4,19 +4,22 @@ import { Line } from "react-chartjs-2";
 interface ExperienceChartProps {
   timestamps: string[];
   data: number[];
+  color: string;
+  title: string;
+  label: string;
 }
 
-export default function ExperienceChart({ timestamps, data }: ExperienceChartProps) {
+export default function ExperienceChart({ timestamps, data, color, title, label }: ExperienceChartProps) {
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
   const graphData = {
     labels: formatLabels(timestamps),
     datasets: [
       {
-        label: "EXP",
+        label: label,
         data: data,
-        borderColor: "#646cff",
-        backgroundColor: "rgba(69, 76, 225, 0.5)"
+        borderColor: color,
+        backgroundColor: color
       }
     ]
   };
@@ -32,7 +35,7 @@ export default function ExperienceChart({ timestamps, data }: ExperienceChartPro
         beginAtZero: false,
         title: {
           display: true,
-          text: "Experience"
+          text: title
         }
       }
     }
@@ -46,6 +49,7 @@ export default function ExperienceChart({ timestamps, data }: ExperienceChartPro
   );
 }
 
+// Rest of the code remains the same
 function formatLabels(timestamps: string[]) {
   const formattedDates = timestamps.map((dateStr) => {
     const date = new Date(dateStr);
