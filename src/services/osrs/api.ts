@@ -7,7 +7,7 @@ import { Period } from "./enum";
 const WOM_API_URL = "https://api.wiseoldman.net/v2/players/";
 const WOM_BASE_URL = "https://wiseoldman.net";
 const HISCORE_BASE_URL = "https://secure.runescape.com/m=hiscore_oldschool";
-const WIKI_BASE_URL = "https://oldschool.runescape.wiki";
+// const WIKI_BASE_URL = "https://oldschool.runescape.wiki";
 
 export const SKILL_ICON_URL = (metric: string) => `https://www.wiseoldman.net/_next/image?url=%2Fimg%2Fmetrics_small%2F${metric}.png&w=32&q=75`;
 export const HISCORE_URL = (username: string) => `${HISCORE_BASE_URL}/hiscorepersonal?user1=${encodeURI(username)}`;
