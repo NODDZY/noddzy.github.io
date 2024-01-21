@@ -5,6 +5,11 @@
     "link": "https://github.com/NODDZY/visual-npc-dialogue"
   },
   {
+    "title": "Ecumenical Key Tracker",
+    "description": "RuneLite plugin. Tracks ecumenical keys (and shards) in the players inventory/bank.",
+    "link": "https://github.com/NODDZY/ecumenical-key-tracker"
+  },
+  {
     "title": "Herb Patch Overlay",
     "description": "RuneLite plugin. Renders colored overlays on herb patches to easily see if herb is ready to be harvested.",
     "link": "https://github.com/NODDZY/herbpatch-overlay"
